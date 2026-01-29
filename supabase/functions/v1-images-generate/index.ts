@@ -4,7 +4,7 @@ import {
   callModel,
   uploadAsset,
   notifyFailure
-} from "../_shared/sofia-edge-functions-template.ts";
+} from "/supabase/functions/_shared/sofia-edge-functions-template.ts";
 
 console.info('images/generate function starting');
 
