@@ -1,10 +1,96 @@
-import {
-  authenticate,
-  getEntitlements,
-  callModel,
-  uploadAsset,
-  notifyFailure
-} from "/supabase/functions/_shared/sofia-edge-functions-template.ts";
+
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+// --- Helper: Authenticate user via Bearer JWT ---
+async function authenticate(req: Request) {
+  const supabase = createClient(
+    Deno.env.get("SUPABASE_URL"),
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")
+  );
+  const authHeader = req.headers.get("Authorization") ?? "";
+  if (!authHeader.startsWith("Bearer ")) {
+    return { error: "Missing or invalid Authorization header", status: 401 };
+  }
+  const token = authHeader.replace("Bearer ", "");
+  const { data, error } = await supabase.auth.getUser(token);
+  if (error || !data.user) {
+    return { error: "Unauthorized", status: 401 };
+  }
+  return { user: data.user };
+}
+
+// --- Helper: Get entitlements for user ---
+async function getEntitlements(userId: string) {
+  const supabase = createClient(
+    Deno.env.get("SUPABASE_URL"),
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")
+  );
+  const { data, error } = await supabase
+    .from("ops.entitlements")
+    .select("*")
+    .eq("user_id", userId)
+    .maybeSingle();
+  if (error) {
+    console.error("Entitlement lookup failed:", error);
+    return null;
+  }
+  return data;
+}
+
+// --- Helper: Alert webhook on failure ---
+async function notifyFailure(detail: string) {
+  const url = Deno.env.get("ALERT_WEBHOOK_URL");
+  if (!url) return;
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        timestamp: new Date().toISOString(),
+        detail,
+      }),
+    });
+  } catch (err) {
+    console.error("Alert webhook failed:", err);
+  }
+}
+
+// --- Helper: Model invocation ---
+async function callModel(providerUrl: string, apiKey: string, payload: any) {
+  const res = await fetch(providerUrl, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Model error: ${res.status} ${text}`);
+  }
+  return res.json();
+}
+
+// --- Helper: Asset upload to Supabase Storage ---
+async function uploadAsset(userId: string, filename: string, blob: Blob) {
+  const supabase = createClient(
+    Deno.env.get("SUPABASE_URL"),
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")
+  );
+  const path = `generated/${userId}/${filename}`;
+  const { error } = await supabase.storage
+    .from("generated-assets")
+    .upload(path, blob, {
+      contentType: blob.type,
+      upsert: true,
+    });
+  if (error) throw error;
+  const { data } = supabase.storage
+    .from("generated-assets")
+    .getPublicUrl(path);
+  return data.publicUrl;
+}
 
 console.info('videos/generate function starting');
 
