@@ -286,7 +286,7 @@ This cadence is designed to support Sofia Core, EmeraldOrbit, Emerald Estates, E
 | Patch | Weekly | Every Monday | Bug fixes, stability |
 | Minor | Monthly | 1st Monday | Features, enhancements |
 | Major | Quarterly | 1st Monday (Jan, Apr, Jul, Oct) | Breaking changes, architectural shifts |
-| Meta | Annually | 2nd Monday of December | Year-end consolidation |
+| Meta | Annually | 2nd Monday of December | Year‑end consolidation |
 
 **Contributor Windows:**
 - **Open:** 2 weeks after major releases
