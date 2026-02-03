@@ -273,7 +273,7 @@ This visualization shows the relative intensity of release activity throughout t
 - **Minor (🟩)** → First Monday of the month
 - **Major (🟧)** → First Monday of each quarter (Jan, Apr, Jul, Oct)
 - **Meta (🟥)** → Second Monday of December
-- **Freeze (🟨)** → Final week of each quarter
+- **Freeze (🟨)** → Final week of Q1-Q3 quarters, final 2 weeks of Q4/December
 
 The heatmap gives contributors and maintainers a single‑glance understanding of the entire year's rhythm.
 
@@ -306,7 +306,7 @@ This cadence is designed to support Sofia Core, EmeraldOrbit, Emerald Estates, E
 **Contributor Windows:**
 - **Open:** 2 weeks after major releases
 - **Stabilization:** 1 week before minor releases
-- **Freeze:** Last week of each quarter
+- **Freeze:** Last week of Q1-Q3 quarters (2 weeks in Q4/December)
 
 **Governance Sync:**
 - **Monthly:** Maintainer sync
