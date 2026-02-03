@@ -153,9 +153,10 @@ To support the cadence, we define three key contributor windows:
 - **Focus:** Bug fixes, documentation, test coverage
 
 ### Freeze Window
-- **When:** Last week of each quarter
+- **When:** Last week of each quarter (extended to 2 weeks in December for annual meta-release)
 - **Activity:** No major merges
 - **Focus:** Integration testing, release preparation, documentation finalization
+- **Note:** December has a 2-week freeze to accommodate the annual meta-release and year-end consolidation
 
 ---
 
@@ -260,7 +261,7 @@ This visualization shows the relative intensity of release activity throughout t
 | **Freeze**   | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 |
 
 **Legend:**
-- 🟦 Patch releases (every Monday, typically 4-5 per month)
+- 🟦 Patch releases (every Monday)
 - 🟩 Minor release (1st Monday)
 - 🟧 Major release (Quarterly, 1st Monday)
 - 🟥 Annual Meta‑Release (2nd Monday of December)
