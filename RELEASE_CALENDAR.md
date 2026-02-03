@@ -153,7 +153,7 @@ To support the cadence, we define three key contributor windows:
 - **Focus:** Bug fixes, documentation, test coverage
 
 ### Freeze Window
-- **When:** Last week of each quarter (extended to 2 weeks in December for annual meta-release)
+- **When:** Last week of Q1-Q3 quarters; final 2 weeks of Q4/December
 - **Activity:** No major merges
 - **Focus:** Integration testing, release preparation, documentation finalization
 - **Note:** December has a 2-week freeze to accommodate the annual meta-release and year-end consolidation
