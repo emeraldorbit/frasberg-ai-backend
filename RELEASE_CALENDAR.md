@@ -84,7 +84,8 @@ JANUARY
   └─ MAJOR RELEASE (Q1): 1st Monday
 
 FEBRUARY
-  └─ Patch Releases: Every Monday
+  ├─ Patch Releases: Every Monday
+  └─ Minor Release: 1st Monday
 
 MARCH
   ├─ Patch Releases: Every Monday
@@ -96,7 +97,8 @@ APRIL
   └─ MAJOR RELEASE (Q2): 1st Monday
 
 MAY
-  └─ Patch Releases: Every Monday
+  ├─ Patch Releases: Every Monday
+  └─ Minor Release: 1st Monday
 
 JUNE
   ├─ Patch Releases: Every Monday
@@ -108,7 +110,8 @@ JULY
   └─ MAJOR RELEASE (Q3): 1st Monday
 
 AUGUST
-  └─ Patch Releases: Every Monday
+  ├─ Patch Releases: Every Monday
+  └─ Minor Release: 1st Monday
 
 SEPTEMBER
   ├─ Patch Releases: Every Monday
@@ -120,7 +123,8 @@ OCTOBER
   └─ MAJOR RELEASE (Q4): 1st Monday
 
 NOVEMBER
-  └─ Patch Releases: Every Monday
+  ├─ Patch Releases: Every Monday
+  └─ Minor Release: 1st Monday
 
 DECEMBER
   ├─ Patch Releases: Every Monday (until freeze)
@@ -187,6 +191,7 @@ timeline
 
     February
         : Patch Releases (Every Monday)
+        : Minor Release (1st Monday)
 
     March
         : Patch Releases (Every Monday)
@@ -199,6 +204,7 @@ timeline
 
     May
         : Patch Releases (Every Monday)
+        : Minor Release (1st Monday)
 
     June
         : Patch Releases (Every Monday)
@@ -211,6 +217,7 @@ timeline
 
     August
         : Patch Releases (Every Monday)
+        : Minor Release (1st Monday)
 
     September
         : Patch Releases (Every Monday)
@@ -223,6 +230,7 @@ timeline
 
     November
         : Patch Releases (Every Monday)
+        : Minor Release (1st Monday)
 
     December
         : Patch Releases (Every Monday until freeze)
@@ -240,7 +248,7 @@ This visualization shows the relative intensity of release activity throughout t
 | Release Type | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
 |--------------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 | **Patch**    | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 |
-| **Minor**    | 🟩 | ⬜ | 🟩 | 🟩 | ⬜ | 🟩 | 🟩 | ⬜ | 🟩 | 🟩 | ⬜ | 🟩 |
+| **Minor**    | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
 | **Major**    | 🟧 | ⬜ | ⬜ | 🟧 | ⬜ | ⬜ | 🟧 | ⬜ | ⬜ | 🟧 | ⬜ | ⬜ |
 | **Meta**     | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟥 |
 | **Freeze**   | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 |
