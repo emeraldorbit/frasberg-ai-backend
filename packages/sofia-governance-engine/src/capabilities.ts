@@ -4,7 +4,7 @@
  * Role: Computes deviation metrics based on resolved identity
  */
 
-import { EngineCapabilities } from '../sofia_core_application_shell/app_shell_capabilities';
+import { EngineCapabilities } from './types';
 
 export const capabilities: EngineCapabilities = {
   provides: [

@@ -4,7 +4,7 @@
  * Role: Resolves and normalizes identity inputs for downstream engines
  */
 
-import { EngineCapabilities } from '../sofia_core_application_shell/app_shell_capabilities';
+import { EngineCapabilities } from './types';
 
 export const capabilities: EngineCapabilities = {
   provides: [

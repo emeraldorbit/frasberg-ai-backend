@@ -4,7 +4,7 @@
  * Role: Applies filtering and transformation rules based on identity and deviation
  */
 
-import { EngineCapabilities } from '../sofia_core_application_shell/app_shell_capabilities';
+import { EngineCapabilities } from './types';
 
 export const capabilities: EngineCapabilities = {
   provides: [
