@@ -1,15 +1,28 @@
 {
-  "name": "sofia-core-backend",
+  "name": "sofia-core-monorepo",
+  "private": true,
   "version": "1.0.2",
   "description": "Sofia Core Backend — Behavioral Governance and Codex Architecture",
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
+    "build": "pnpm -r build",
     "test": "jest",
     "test:codex": "jest tests/codex_architecture",
-    "typecheck": "tsc --noEmit"
+    "test:packages": "pnpm -r test",
+    "typecheck": "tsc --noEmit",
+    "lint": "pnpm -r lint"
   },
   "dependencies": {
-    "express": "^4.18.0"
+    "express": "^4.18.0",
+    "@emeraldorbit/sofia-governance-engine": "workspace:*",
+    "@emeraldorbit/sofia-tonal-modulation": "workspace:*",
+    "@emeraldorbit/sofia-membrane-protocol": "workspace:*",
+    "@emeraldorbit/sofia-hinge-logic": "workspace:*",
+    "@emeraldorbit/sofia-unified-field-runtime": "workspace:*",
+    "@emeraldorbit/sofia-continuum-identity": "workspace:*"
   },
   "devDependencies": {
     "@types/express": "^4.17.0",
