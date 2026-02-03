@@ -258,14 +258,14 @@ This visualization shows the relative intensity of release activity throughout t
 | **Minor**    | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
 | **Major**    | 🟧 | ⬜ | ⬜ | 🟧 | ⬜ | ⬜ | 🟧 | ⬜ | ⬜ | 🟧 | ⬜ | ⬜ |
 | **Meta**     | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | 🟥 |
-| **Freeze**   | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 |
+| **Freeze**   | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨🟨 |
 
 **Legend:**
 - 🟦 Patch releases (every Monday)
 - 🟩 Minor release (1st Monday)
 - 🟧 Major release (Quarterly, 1st Monday)
 - 🟥 Annual Meta‑Release (2nd Monday of December)
-- 🟨 Freeze Window (Last week of quarter)
+- 🟨 Freeze Window (1 week at end of Q1-Q3, 2 weeks at end of Q4/December)
 - ⬜ No activity
 
 ### How to read this heatmap:
