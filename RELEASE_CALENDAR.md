@@ -89,7 +89,8 @@ FEBRUARY
 
 MARCH
   ├─ Patch Releases: Every Monday
-  └─ Minor Release: 1st Monday
+  ├─ Minor Release: 1st Monday
+  └─ Freeze Window: Final week (Q1 end)
 
 APRIL
   ├─ Patch Releases: Every Monday
@@ -102,7 +103,8 @@ MAY
 
 JUNE
   ├─ Patch Releases: Every Monday
-  └─ Minor Release: 1st Monday
+  ├─ Minor Release: 1st Monday
+  └─ Freeze Window: Final week (Q2 end)
 
 JULY
   ├─ Patch Releases: Every Monday
@@ -115,7 +117,8 @@ AUGUST
 
 SEPTEMBER
   ├─ Patch Releases: Every Monday
-  └─ Minor Release: 1st Monday
+  ├─ Minor Release: 1st Monday
+  └─ Freeze Window: Final week (Q3 end)
 
 OCTOBER
   ├─ Patch Releases: Every Monday
@@ -130,7 +133,7 @@ DECEMBER
   ├─ Patch Releases: Every Monday (until freeze)
   ├─ Minor Release: 1st Monday
   ├─ Annual Meta‑Release: 2nd Monday
-  └─ Freeze Window: Final 2 weeks
+  └─ Freeze Window: Final 2 weeks (Q4 end)
 ```
 
 ---
@@ -196,6 +199,7 @@ timeline
     March
         : Patch Releases (Every Monday)
         : Minor Release (1st Monday)
+        : Freeze Window (Final week)
 
     April
         : Patch Releases (Every Monday)
@@ -209,6 +213,7 @@ timeline
     June
         : Patch Releases (Every Monday)
         : Minor Release (1st Monday)
+        : Freeze Window (Final week)
 
     July
         : Patch Releases (Every Monday)
@@ -222,6 +227,7 @@ timeline
     September
         : Patch Releases (Every Monday)
         : Minor Release (1st Monday)
+        : Freeze Window (Final week)
 
     October
         : Patch Releases (Every Monday)
@@ -254,7 +260,7 @@ This visualization shows the relative intensity of release activity throughout t
 | **Freeze**   | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 | ⬜ | ⬜ | 🟨 |
 
 **Legend:**
-- 🟦 Patch releases (4 per month = every Monday)
+- 🟦 Patch releases (every Monday, typically 4-5 per month)
 - 🟩 Minor release (1st Monday)
 - 🟧 Major release (Quarterly, 1st Monday)
 - 🟥 Annual Meta‑Release (2nd Monday of December)
