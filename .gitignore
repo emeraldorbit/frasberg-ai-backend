@@ -13,6 +13,10 @@ build/
 *.d.ts
 *.tsbuildinfo
 
+# Compiled JS files in TypeScript source directories
+supabase/**/*.js
+supabase/**/*.d.ts.map
+
 # Coverage
 coverage/
 .nyc_output/
