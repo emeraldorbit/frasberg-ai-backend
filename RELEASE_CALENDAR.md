@@ -252,6 +252,8 @@ timeline
 
 This visualization shows the relative intensity of release activity throughout the year:
 
+> **Note:** This heatmap uses emoji symbols for visual clarity. For best viewing, use a markdown viewer that supports emoji rendering.
+
 | Release Type | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
 |--------------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 | **Patch**    | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 | 🟦🟦🟦🟦 |
@@ -265,7 +267,7 @@ This visualization shows the relative intensity of release activity throughout t
 - 🟩 Minor release (1st Monday)
 - 🟧 Major release (Quarterly, 1st Monday)
 - 🟥 Annual Meta‑Release (2nd Monday of December)
-- 🟨 Freeze Window (1 week at end of Q1-Q3, 2 weeks at end of Q4/December)
+- 🟨 Freeze Window (1 week at end of Q1-Q3, 2 weeks at end of Q4/December - note the double 🟨🟨 in December column)
 - ⬜ No activity
 
 ### How to read this heatmap:
