@@ -281,13 +281,13 @@ flowchart TD
     B4 --> C3
     C3 --> D1
     D3 --> E
-    E3 --> A[Start Next Cycle]
+    E3 --> A
     
-    style A fill:#90EE90
-    style B fill:#87CEEB
-    style C fill:#FFD700
-    style D fill:#FF6B6B
-    style E fill:#9370DB
+    style "🟢 Open Window (2 weeks after Major Release)" fill:#90EE90
+    style "🔵 Development Phase (Regular Contributions)" fill:#87CEEB
+    style "🟡 Stabilization Window (1 week before Minor Release)" fill:#FFD700
+    style "🔴 Freeze Window (End of Quarter)" fill:#FF6B6B
+    style "🎯 Release Phase" fill:#9370DB
 ```
 
 **Workflow Guide for Contributors:**
