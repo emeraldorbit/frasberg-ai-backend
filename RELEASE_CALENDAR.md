@@ -30,6 +30,29 @@ This cadence ensures:
 
 All dates use a **Monday‑based cadence** for maximum contributor clarity.
 
+## 📛 Release Status Badges
+
+Current release and cadence information at a glance:
+
+![Current Version](https://img.shields.io/badge/Current-v1.1.x-blue)
+![Next Major](https://img.shields.io/badge/Next%20Major-Q2%202026-orange)
+![Days to Minor](https://img.shields.io/badge/Next%20Minor-1st%20Monday-green)
+
+**Release Cadence:**
+
+![Patch Release](https://img.shields.io/badge/Patch-Weekly%20Monday-blue)
+![Minor Release](https://img.shields.io/badge/Minor-1st%20Monday-green)
+![Major Release](https://img.shields.io/badge/Major-Quarterly-orange)
+![Meta Release](https://img.shields.io/badge/Meta-December%202nd%20Monday-red)
+
+**Contributor Window Status:**
+
+![Window Status](https://img.shields.io/badge/Status-Active-success)
+![Contributor Window](https://img.shields.io/badge/Window-Open-brightgreen)
+![Freeze Status](https://img.shields.io/badge/Freeze-None-lightgrey)
+
+> **Note:** These badges provide a quick visual reference for release timing and contributor activity windows. During freeze windows (end of quarters), the status badges will reflect restricted merge activity.
+
 ---
 
 ## 🏷️ Badges
@@ -425,6 +448,151 @@ timeline
         : Annual Meta‑Release (2nd Monday)
         : Freeze Window (Final 2 weeks)
 ```
+
+---
+
+## 📈 Gantt Chart Timeline
+
+This Gantt chart visualizes the quarterly release phases, showing how major releases, contributor windows, and freeze periods align throughout the year:
+
+```mermaid
+gantt
+    title Quarterly Release Phases and Contributor Windows
+    dateFormat YYYY-MM-DD
+    axisFormat %b
+
+    section Q1 Releases
+    Major Release (Jan)      :milestone, m1, 2026-01-05, 0d
+    Open Window (2 weeks)    :active, ow1, 2026-01-05, 14d
+    Minor Release (Feb)      :milestone, min1, 2026-02-02, 0d
+    Stabilization (1 week)   :crit, stab1, 2026-01-26, 7d
+    Minor Release (Mar)      :milestone, min2, 2026-03-02, 0d
+    Stabilization (1 week)   :crit, stab2, 2026-02-23, 7d
+    Freeze Window (Q1 end)   :done, freeze1, 2026-03-23, 7d
+
+    section Q2 Releases
+    Major Release (Apr)      :milestone, m2, 2026-04-06, 0d
+    Open Window (2 weeks)    :active, ow2, 2026-04-06, 14d
+    Minor Release (May)      :milestone, min3, 2026-05-04, 0d
+    Stabilization (1 week)   :crit, stab3, 2026-04-27, 7d
+    Minor Release (Jun)      :milestone, min4, 2026-06-01, 0d
+    Stabilization (1 week)   :crit, stab4, 2026-05-25, 7d
+    Freeze Window (Q2 end)   :done, freeze2, 2026-06-22, 7d
+
+    section Q3 Releases
+    Major Release (Jul)      :milestone, m3, 2026-07-06, 0d
+    Open Window (2 weeks)    :active, ow3, 2026-07-06, 14d
+    Minor Release (Aug)      :milestone, min5, 2026-08-03, 0d
+    Stabilization (1 week)   :crit, stab5, 2026-07-27, 7d
+    Minor Release (Sep)      :milestone, min6, 2026-09-07, 0d
+    Stabilization (1 week)   :crit, stab6, 2026-08-31, 7d
+    Freeze Window (Q3 end)   :done, freeze3, 2026-09-21, 7d
+
+    section Q4 Releases
+    Major Release (Oct)      :milestone, m4, 2026-10-05, 0d
+    Open Window (2 weeks)    :active, ow4, 2026-10-05, 14d
+    Minor Release (Nov)      :milestone, min7, 2026-11-02, 0d
+    Stabilization (1 week)   :crit, stab7, 2026-10-26, 7d
+    Minor Release (Dec)      :milestone, min8, 2026-12-07, 0d
+    Meta-Release (Dec 2nd)   :milestone, meta, 2026-12-14, 0d
+    Freeze Window (Q4 end)   :done, freeze4, 2026-12-14, 14d
+
+    section Patch Releases
+    Weekly Patches           :active, patches, 2026-01-01, 365d
+```
+
+**Chart Legend:**
+- **Milestones (◆):** Major, minor, and meta-release dates
+- **Active (green):** Open contributor windows for high-velocity feature intake
+- **Critical (red):** Stabilization windows for patch-only activity
+- **Done (grey):** Freeze windows with restricted merge activity
+- **Patch Releases:** Continuous weekly cadence (every Monday) throughout the year
+
+---
+
+## 🏊 Swimlane Workflow Diagram
+
+This diagram shows how different release tracks run in parallel and interact with governance processes:
+
+```mermaid
+graph TB
+    subgraph "Patch Track - Weekly Releases"
+        P1[Monday: Patch v1.1.1]
+        P2[Monday: Patch v1.1.2]
+        P3[Monday: Patch v1.1.3]
+        P4[Monday: Patch v1.1.4]
+        P1 --> P2 --> P3 --> P4
+    end
+
+    subgraph "Minor Track - Monthly Releases"
+        M1[1st Monday: Minor v1.1.0]
+        M2[1st Monday: Minor v1.2.0]
+        M3[1st Monday: Minor v1.3.0]
+        M1 --> M2 --> M3
+    end
+
+    subgraph "Major Track - Quarterly Releases"
+        MAJ1[Jan 1st Mon: Major v1.0.0]
+        MAJ2[Apr 1st Mon: Major v2.0.0]
+        MAJ3[Jul 1st Mon: Major v3.0.0]
+        MAJ4[Oct 1st Mon: Major v4.0.0]
+        MAJ1 --> MAJ2 --> MAJ3 --> MAJ4
+    end
+
+    subgraph "Governance Track"
+        G1[Monthly Maintainer Sync]
+        G2[Quarterly Architecture Review]
+        G3[Annual Unified-Field Review]
+        G1 --> G2 --> G3
+    end
+
+    %% Interactions between tracks
+    MAJ1 -.->|triggers| M1
+    M1 -.->|includes| P1
+    M1 -.->|includes| P2
+    M1 -.->|includes| P3
+    M1 -.->|includes| P4
+    
+    M1 -.->|triggers| M2
+    M2 -.->|includes patches| P2
+    
+    G1 -.->|reviews| M1
+    G2 -.->|plans| MAJ2
+    
+    MAJ1 -.->|2-week Open Window| M1
+    M2 -.->|Stabilization Window| P3
+    M3 -.->|Freeze Window| MAJ2
+
+    style MAJ1 fill:#ff9f40
+    style MAJ2 fill:#ff9f40
+    style MAJ3 fill:#ff9f40
+    style MAJ4 fill:#ff9f40
+    style M1 fill:#4bc0c0
+    style M2 fill:#4bc0c0
+    style M3 fill:#4bc0c0
+    style P1 fill:#36a2eb
+    style P2 fill:#36a2eb
+    style P3 fill:#36a2eb
+    style P4 fill:#36a2eb
+    style G1 fill:#9966ff
+    style G2 fill:#9966ff
+    style G3 fill:#9966ff
+```
+
+**Swimlane Interactions:**
+- **Solid arrows (→):** Sequential progression within a track
+- **Dotted arrows (⋯→):** Cross-track synchronization and dependencies
+- **Orange nodes:** Major releases (Quarterly)
+- **Teal nodes:** Minor releases (Monthly)
+- **Blue nodes:** Patch releases (Weekly)
+- **Purple nodes:** Governance sync points
+
+**Key Sync Points:**
+1. Major releases trigger 2-week Open Windows for feature intake
+2. Minor releases include all patches from the previous month
+3. Monthly Maintainer Syncs review upcoming minor releases
+4. Quarterly Architecture Reviews plan major release content
+5. Freeze Windows coordinate across all tracks at quarter-end
 
 ---
 
