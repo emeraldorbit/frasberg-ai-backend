@@ -17,6 +17,32 @@ All dates use a **Monday‑based cadence** for maximum contributor clarity.
 
 ---
 
+## 📖 Table of Contents
+
+- [Overview](#-overview)
+- [Badges](#-badges)
+- [Release Types](#-release-types)
+- [Visual Calendar Layout](#️-visual-calendar-layout)
+- [Annual Release Timeline (Gantt Chart)](#-annual-release-timeline-gantt-chart)
+- [Contributor Workflow Process](#-contributor-workflow-process)
+- [Contributor Windows](#-contributor-windows)
+- [Governance Sync Points](#-governance-sync-points)
+- [Mermaid Timeline View](#-mermaid-timeline-view)
+- [Release Intensity Heatmap](#-release-intensity-heatmap)
+- [Purpose](#-purpose)
+- [Quick Reference](#-quick-reference)
+
+---
+
+## 🏷️ Badges
+
+![Release Cadence](https://img.shields.io/badge/Releases-Weekly%20%7C%20Monthly%20%7C%20Quarterly-blue?style=flat-square)
+![Contribution Status](https://img.shields.io/badge/Contributions-Welcome-brightgreen?style=flat-square)
+![Version](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+
+---
+
 ## 🔄 Release Types
 
 ### 1. Patch Releases — Weekly
@@ -135,6 +161,144 @@ DECEMBER
   ├─ Annual Meta‑Release: 2nd Monday
   └─ Freeze Window: Final 2 weeks (Q4 end)
 ```
+
+---
+
+## 📊 Annual Release Timeline (Gantt Chart)
+
+This Gantt chart visualizes the entire year's release schedule, showing the flow and overlap of different release types, freeze windows, and key milestones.
+
+```mermaid
+gantt
+    title Sofia Core Annual Release Cadence
+    dateFormat YYYY-MM-DD
+    
+    section Q1 Major Release
+    Major Release Q1 (Jan 1st Mon)    :milestone, m1, 2024-01-01, 0d
+    Open Window (2 weeks)             :active, ow1, 2024-01-01, 14d
+    Development Phase                 :dev1, after ow1, 60d
+    Freeze Window (Final week)        :crit, freeze1, 2024-03-25, 7d
+    
+    section Q2 Major Release
+    Major Release Q2 (Apr 1st Mon)    :milestone, m2, 2024-04-01, 0d
+    Open Window (2 weeks)             :active, ow2, 2024-04-01, 14d
+    Development Phase                 :dev2, after ow2, 60d
+    Freeze Window (Final week)        :crit, freeze2, 2024-06-24, 7d
+    
+    section Q3 Major Release
+    Major Release Q3 (Jul 1st Mon)    :milestone, m3, 2024-07-01, 0d
+    Open Window (2 weeks)             :active, ow3, 2024-07-01, 14d
+    Development Phase                 :dev3, after ow3, 60d
+    Freeze Window (Final week)        :crit, freeze3, 2024-09-23, 7d
+    
+    section Q4 Major Release
+    Major Release Q4 (Oct 1st Mon)    :milestone, m4, 2024-10-01, 0d
+    Open Window (2 weeks)             :active, ow4, 2024-10-01, 14d
+    Development Phase                 :dev4, after ow4, 43d
+    Annual Meta-Release (Dec 2nd Mon) :milestone, meta, 2024-12-09, 0d
+    Freeze Window (Final 2 weeks)     :crit, freeze4, 2024-12-16, 14d
+    
+    section Monthly Minor Releases
+    Minor Release (Every 1st Mon)     :done, minor, 2024-01-01, 365d
+    
+    section Weekly Patch Releases
+    Patch Releases (Every Monday)     :patch, 2024-01-01, 365d
+```
+
+**Chart Legend:**
+- **Milestones (diamonds):** Major releases (quarterly) and Annual Meta-Release
+- **Active (green):** Open Windows for high-velocity feature intake
+- **Development (blue):** Regular development phases
+- **Critical (red):** Freeze Windows - no major merges, integration testing only
+- **Done (gray):** Monthly minor releases (1st Monday of each month)
+- **Patch (light blue):** Weekly patch releases (every Monday)
+
+---
+
+## 🌊 Contributor Workflow Process
+
+This swimlane diagram shows how contributors should engage with the project across different release phases:
+
+```mermaid
+flowchart TD
+    subgraph "Release Cycle Phases"
+        direction TB
+        
+        subgraph "🟢 Open Window (2 weeks after Major Release)"
+            A[High-Velocity Feature Intake]
+            A1[Submit Major Features]
+            A2[Propose Architectural Changes]
+            A3[Experimental Contributions]
+            A --> A1
+            A --> A2
+            A --> A3
+        end
+        
+        subgraph "🔵 Development Phase (Regular Contributions)"
+            B[Active Development]
+            B1[Feature Development]
+            B2[Bug Fixes]
+            B3[Documentation]
+            B4[Test Coverage]
+            B --> B1
+            B --> B2
+            B --> B3
+            B --> B4
+        end
+        
+        subgraph "🟡 Stabilization Window (1 week before Minor Release)"
+            C[Patch-Only Contributions]
+            C1[Critical Bug Fixes]
+            C2[Documentation Updates]
+            C3[Test Improvements]
+            C --> C1
+            C --> C2
+            C --> C3
+        end
+        
+        subgraph "🔴 Freeze Window (End of Quarter)"
+            D[Integration Testing Only]
+            D1[No Major Merges]
+            D2[Release Preparation]
+            D3[Documentation Finalization]
+            D --> D1
+            D --> D2
+            D --> D3
+        end
+        
+        subgraph "🎯 Release Phase"
+            E[Tagged Release]
+            E1[Version Tagged]
+            E2[Release Notes Published]
+            E3[Artifacts Published]
+            E --> E1
+            E --> E2
+            E --> E3
+        end
+    end
+    
+    A3 --> B1
+    B4 --> C3
+    C3 --> D1
+    D3 --> E
+    E3 --> A[Start Next Cycle]
+    
+    style A fill:#90EE90
+    style B fill:#87CEEB
+    style C fill:#FFD700
+    style D fill:#FF6B6B
+    style E fill:#9370DB
+```
+
+**Workflow Guide for Contributors:**
+
+| Phase | Duration | What to Contribute | What to Avoid |
+|-------|----------|-------------------|---------------|
+| **🟢 Open Window** | 2 weeks after major release | Major features, architectural proposals, experimental work | Rushing incomplete features |
+| **🔵 Development** | Between open and stabilization | Features, enhancements, bug fixes, docs | Breaking changes late in cycle |
+| **🟡 Stabilization** | 1 week before minor release | Critical fixes, documentation, tests | New features, refactoring |
+| **🔴 Freeze** | Last week of quarter (2 weeks in Dec) | Emergency patches only | Any non-critical changes |
+| **🎯 Release** | Release day (Monday) | Monitor for issues, prepare next cycle | Last-minute changes |
 
 ---
 
