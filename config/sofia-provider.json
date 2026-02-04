@@ -1,19 +1,19 @@
 {
   "ai": {
     "provider": "sofia-core",
-    "apiKeySource": "github-or-supabase",
+    "apiKeySource": "github",
     "fallbackProviders": [],
     "allowExternalProviders": false
   },
   "imageGeneration": {
     "provider": "sofia-core",
-    "apiKeySource": "github-or-supabase",
+    "apiKeySource": "github",
     "fallbackProviders": [],
     "allowExternalProviders": false
   },
   "videoGeneration": {
     "provider": "sofia-core",
-    "apiKeySource": "github-or-supabase",
+    "apiKeySource": "github",
     "fallbackProviders": [],
     "allowExternalProviders": false
   },

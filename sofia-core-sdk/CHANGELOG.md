@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for text, image, and video generation
 - Configuration management
 - TypeScript support with full type definitions
-- MIT License
+- UNLICENSED proprietary license
 - Contributing guidelines
 - Security policy
 - Comprehensive README
