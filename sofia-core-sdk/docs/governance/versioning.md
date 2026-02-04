@@ -311,7 +311,7 @@ See [Deprecation Policy](deprecation.md) for full details.
 ### Security
 - Fixed vulnerability B (#127)
 
-[1.2.0]: https://github.com/emerald-estates/sofia-core-sdk/compare/v1.1.0...v1.2.0
+[1.2.0]: https://github.com/emeraldorbit/sofia-core-backend/compare/v1.1.0...v1.2.0
 ```
 
 ### Migration Guides

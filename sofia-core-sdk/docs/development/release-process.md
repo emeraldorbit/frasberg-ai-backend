@@ -179,8 +179,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - TypeScript support
 - ESM and CJS support
 
-[1.1.0]: https://github.com/emerald-estates/sofia-core-sdk/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/emerald-estates/sofia-core-sdk/releases/tag/v1.0.0
+[1.1.0]: https://github.com/emeraldorbit/sofia-core-backend/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/emeraldorbit/sofia-core-backend/releases/tag/v1.0.0
 ```
 
 **Commit CHANGELOG**

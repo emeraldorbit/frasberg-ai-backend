@@ -51,13 +51,13 @@ curl "https://api.npmjs.org/downloads/range/last-month/@sofia/core-sdk"
 **GitHub Insights:**
 ```bash
 # View traffic
-gh api repos/emerald-estates/sofia-core-sdk/traffic/views
+gh api repos/emeraldorbit/sofia-core-backend/traffic/views
 
 # View clones
-gh api repos/emerald-estates/sofia-core-sdk/traffic/clones
+gh api repos/emeraldorbit/sofia-core-backend/traffic/clones
 
 # Popular content
-gh api repos/emerald-estates/sofia-core-sdk/traffic/popular/paths
+gh api repos/emeraldorbit/sofia-core-backend/traffic/popular/paths
 ```
 
 **Metrics to Monitor:**
@@ -484,7 +484,7 @@ curl -X POST -H 'Content-type: application/json' \
 ```bash
 # Send email alert
 echo "SDK bundle size exceeded budget" | \
-  mail -s "SDK Alert" team@emerald-estates.com
+  mail -s "SDK Alert" team@emeraldorbit.com
 ```
 
 ### Alert Rules

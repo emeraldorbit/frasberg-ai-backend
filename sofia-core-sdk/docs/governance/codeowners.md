@@ -21,42 +21,42 @@ sofia-core-sdk/.github/CODEOWNERS
 # This file defines code ownership for the Sofia Core SDK
 
 # Default owners for everything in the repo
-* @emerald-estates/sofia-core-maintainers
+* @emeraldorbit/sofia-core-maintainers
 
 # Core SDK
-/src/ @emerald-estates/sdk-team
-/src/client/ @emerald-estates/sdk-team @tech-lead
-/src/providers/ @emerald-estates/provider-team
+/src/ @emeraldorbit/sdk-team
+/src/client/ @emeraldorbit/sdk-team @tech-lead
+/src/providers/ @emeraldorbit/provider-team
 
 # Configuration
-/src/config/ @emerald-estates/sdk-team @devops-team
+/src/config/ @emeraldorbit/sdk-team @devops-team
 /.env.example @devops-team
 
 # Documentation
-/docs/ @emerald-estates/documentation-team
-/README.md @emerald-estates/documentation-team
-/CHANGELOG.md @emerald-estates/release-team
+/docs/ @emeraldorbit/documentation-team
+/README.md @emeraldorbit/documentation-team
+/CHANGELOG.md @emeraldorbit/release-team
 
 # Testing
-/src/**/*.test.ts @emerald-estates/qa-team
-/src/__tests__/ @emerald-estates/qa-team
+/src/**/*.test.ts @emeraldorbit/qa-team
+/src/__tests__/ @emeraldorbit/qa-team
 
 # Build and CI/CD
 /.github/ @devops-team
-/.github/workflows/ @devops-team @emerald-estates/release-team
-/package.json @emerald-estates/release-team
-/tsconfig.json @emerald-estates/sdk-team
+/.github/workflows/ @devops-team @emeraldorbit/release-team
+/package.json @emeraldorbit/release-team
+/tsconfig.json @emeraldorbit/sdk-team
 
 # Security
 /SECURITY.md @security-team
 /docs/governance/security.md @security-team
 
 # Types and Interfaces
-/src/types/ @emerald-estates/sdk-team @tech-lead
-/src/**/*.d.ts @emerald-estates/sdk-team
+/src/types/ @emeraldorbit/sdk-team @tech-lead
+/src/**/*.d.ts @emeraldorbit/sdk-team
 
 # Examples
-/examples/ @emerald-estates/documentation-team @emerald-estates/sdk-team
+/examples/ @emeraldorbit/documentation-team @emeraldorbit/sdk-team
 ```
 
 ## Code Ownership Areas
@@ -305,7 +305,7 @@ Areas requiring elevated review:
 
 ## Teams and Roles
 
-### @emerald-estates/sofia-core-maintainers
+### @emeraldorbit/sofia-core-maintainers
 
 **Members:** Core maintainers  
 **Scope:** Overall repository  
@@ -315,7 +315,7 @@ Areas requiring elevated review:
 - Security reviews
 - Breaking changes
 
-### @emerald-estates/sdk-team
+### @emeraldorbit/sdk-team
 
 **Members:** SDK developers  
 **Scope:** `/src/`  
@@ -325,7 +325,7 @@ Areas requiring elevated review:
 - Type definitions
 - Code quality
 
-### @emerald-estates/provider-team
+### @emeraldorbit/provider-team
 
 **Members:** Provider specialists  
 **Scope:** `/src/providers/`  
@@ -334,7 +334,7 @@ Areas requiring elevated review:
 - Provider abstraction
 - Integration testing
 
-### @emerald-estates/documentation-team
+### @emeraldorbit/documentation-team
 
 **Members:** Technical writers and contributors  
 **Scope:** `/docs/`, `README.md`  
@@ -344,7 +344,7 @@ Areas requiring elevated review:
 - Cross-references
 - Clarity and consistency
 
-### @emerald-estates/qa-team
+### @emeraldorbit/qa-team
 
 **Members:** QA engineers  
 **Scope:** Tests, test infrastructure  
@@ -353,7 +353,7 @@ Areas requiring elevated review:
 - Test quality
 - Testing best practices
 
-### @emerald-estates/release-team
+### @emeraldorbit/release-team
 
 **Members:** Release managers  
 **Scope:** Release process, CI/CD  
@@ -453,7 +453,7 @@ Areas requiring elevated review:
 
 For questions about code ownership:
 - **GitHub:** Create issue with `codeowners` label
-- **Email:** codeowners@emerald-estates.com
+- **Email:** codeowners@emeraldorbit.com
 - **Tech Lead:** @tech-lead on GitHub
 
 ---

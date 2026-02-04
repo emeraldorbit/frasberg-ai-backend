@@ -541,7 +541,7 @@ npm run build
 
 Questions about policies:
 - **GitHub:** Create issue with `policy` label
-- **Email:** team@emerald-estates.com
+- **Email:** team@emeraldorbit.com
 - **Tech Lead:** @tech-lead on GitHub
 
 ---

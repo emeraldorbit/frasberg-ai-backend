@@ -596,7 +596,7 @@ Create maintenance dashboard tracking:
 
 Maintenance questions:
 - **GitHub:** Create issue with `maintenance` label
-- **Email:** maintenance@emerald-estates.com
+- **Email:** maintenance@emeraldorbit.com
 - **Slack:** #sofia-sdk-maintenance
 
 ---
