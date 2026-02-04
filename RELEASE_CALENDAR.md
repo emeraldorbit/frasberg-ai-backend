@@ -2,6 +2,21 @@
 
 **Applies to:** Sofia Core, EmeraldOrbit, Emerald Estates, EWF, and SEFAA
 
+## Table of Contents
+
+- [Overview](#-overview)
+- [Badges](#-badges)
+- [Release Types](#-release-types)
+- [Annual Release Gantt Chart](#-annual-release-gantt-chart)
+- [Visual Calendar Layout](#️-visual-calendar-layout)
+- [Contributor Windows](#-contributor-windows)
+- [Contributor Workflow Process](#-contributor-workflow-process)
+- [Governance Sync Points](#-governance-sync-points)
+- [Mermaid Timeline View](#-mermaid-timeline-view)
+- [Release Intensity Heatmap](#-release-intensity-heatmap)
+- [Purpose](#-purpose)
+- [Quick Reference](#-quick-reference)
+
 ## 📅 Overview
 
 This document defines the predictable annual rhythm for patch, minor, and major releases.
@@ -14,6 +29,15 @@ This cadence ensures:
 - **Zero‑surprise evolution** — Planned, ceremonial change management
 
 All dates use a **Monday‑based cadence** for maximum contributor clarity.
+
+---
+
+## 🏷️ Badges
+
+![Release Cadence](https://img.shields.io/badge/Releases-Weekly%20%7C%20Monthly%20%7C%20Quarterly-blue?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.0.2-green?style=flat-square)
+![Contribution Status](https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat-square)
+![Governance](https://img.shields.io/badge/governance-unified%20field-purple?style=flat-square)
 
 ---
 
@@ -68,6 +92,54 @@ This aligns with roadmap phases and ensures major changes land with ceremony and
 - Unified‑field alignment review
 
 This is the "architectural audit" moment — the field's annual reset.
+
+---
+
+## 📊 Annual Release Gantt Chart
+
+This Gantt chart visualizes the complete annual release schedule, showing the relationship between different release types and key windows throughout the year:
+
+```mermaid
+gantt
+    title Sofia Core Annual Release Cadence Timeline
+    dateFormat YYYY-MM-DD
+    axisFormat %b
+    
+    section Q1 Releases
+    Major Release Q1 (Jan 1st Mon)    :milestone, m1, 2026-01-05, 0d
+    Minor Release (Feb 1st Mon)       :milestone, m2, 2026-02-02, 0d
+    Minor Release (Mar 1st Mon)       :milestone, m3, 2026-03-02, 0d
+    Q1 Freeze Window                  :crit, f1, 2026-03-23, 7d
+    
+    section Q2 Releases
+    Major Release Q2 (Apr 1st Mon)    :milestone, m4, 2026-04-06, 0d
+    Minor Release (May 1st Mon)       :milestone, m5, 2026-05-04, 0d
+    Minor Release (Jun 1st Mon)       :milestone, m6, 2026-06-01, 0d
+    Q2 Freeze Window                  :crit, f2, 2026-06-22, 7d
+    
+    section Q3 Releases
+    Major Release Q3 (Jul 1st Mon)    :milestone, m7, 2026-07-06, 0d
+    Minor Release (Aug 1st Mon)       :milestone, m8, 2026-08-03, 0d
+    Minor Release (Sep 1st Mon)       :milestone, m9, 2026-09-07, 0d
+    Q3 Freeze Window                  :crit, f3, 2026-09-21, 7d
+    
+    section Q4 Releases
+    Major Release Q4 (Oct 1st Mon)    :milestone, m10, 2026-10-05, 0d
+    Minor Release (Nov 1st Mon)       :milestone, m11, 2026-11-02, 0d
+    Minor Release (Dec 1st Mon)       :milestone, m12, 2026-12-07, 0d
+    Annual Meta-Release (Dec 2nd Mon) :milestone, meta, 2026-12-14, 0d
+    Q4 Freeze Window                  :crit, f4, 2026-12-14, 14d
+    
+    section Weekly Cadence
+    Patch Releases (Every Monday)     :active, patches, 2026-01-05, 360d
+```
+
+**Key Elements:**
+- **Major Releases** (Milestones) — Quarterly on 1st Monday of Jan, Apr, Jul, Oct
+- **Minor Releases** (Milestones) — Monthly on 1st Monday
+- **Annual Meta‑Release** (Milestone) — 2nd Monday of December
+- **Freeze Windows** (Red/Critical) — Last week of Q1-Q3, final 2 weeks of Q4
+- **Patch Releases** (Active bar) — Continuous weekly rhythm every Monday
 
 ---
 
@@ -157,6 +229,114 @@ To support the cadence, we define three key contributor windows:
 - **Activity:** No major merges
 - **Focus:** Integration testing, release preparation, documentation finalization
 - **Note:** December has a 2-week freeze to accommodate the annual meta-release and year-end consolidation
+
+---
+
+## 🔀 Contributor Workflow Process
+
+This swimlane diagram illustrates the contributor workflow across different release phases, showing when and how to contribute throughout the release cycle:
+
+```mermaid
+flowchart TB
+    subgraph "🚀 Major Release"
+        MR[Major Release<br/>1st Monday of Quarter]
+    end
+    
+    subgraph "⚡ Open Window Phase"
+        direction LR
+        OW1[High-Velocity<br/>Feature Intake]
+        OW2[New Capabilities]
+        OW3[Experimental Features]
+        OW4[Architectural Proposals]
+        OW1 --> OW2 --> OW3 --> OW4
+    end
+    
+    subgraph "💻 Development Phase"
+        direction LR
+        DP1[Regular Contributions]
+        DP2[Feature Development]
+        DP3[Bug Fixes]
+        DP4[Documentation]
+        DP1 --> DP2 --> DP3 --> DP4
+    end
+    
+    subgraph "🔧 Stabilization Window"
+        direction LR
+        SW1[Patch-Only Period]
+        SW2[Bug Fixes]
+        SW3[Documentation Updates]
+        SW4[Test Coverage]
+        SW1 --> SW2 --> SW3 --> SW4
+    end
+    
+    subgraph "📦 Minor Release"
+        MNR[Minor Release<br/>1st Monday of Month]
+    end
+    
+    subgraph "🧊 Freeze Window Phase"
+        direction LR
+        FW1[No Major Merges]
+        FW2[Integration Testing]
+        FW3[Release Preparation]
+        FW4[Documentation Finalization]
+        FW1 --> FW2 --> FW3 --> FW4
+    end
+    
+    subgraph "🎯 Release Phase"
+        direction LR
+        RP1[Tagged Release]
+        RP2[Changelog Published]
+        RP3[Artifacts Deployed]
+        RP1 --> RP2 --> RP3
+    end
+    
+    MR --> OW1
+    OW4 --> DP1
+    DP4 --> SW1
+    SW4 --> MNR
+    MNR --> DP1
+    DP4 --> FW1
+    FW4 --> RP1
+    RP3 --> MR
+    
+    style MR fill:#ff6b6b
+    style MNR fill:#4ecdc4
+    style OW1 fill:#95e1d3
+    style OW2 fill:#95e1d3
+    style OW3 fill:#95e1d3
+    style OW4 fill:#95e1d3
+    style DP1 fill:#a8e6cf
+    style DP2 fill:#a8e6cf
+    style DP3 fill:#a8e6cf
+    style DP4 fill:#a8e6cf
+    style SW1 fill:#ffd93d
+    style SW2 fill:#ffd93d
+    style SW3 fill:#ffd93d
+    style SW4 fill:#ffd93d
+    style FW1 fill:#ffb347
+    style FW2 fill:#ffb347
+    style FW3 fill:#ffb347
+    style FW4 fill:#ffb347
+    style RP1 fill:#c7ceea
+    style RP2 fill:#c7ceea
+    style RP3 fill:#c7ceea
+```
+
+**Workflow Phases Explained:**
+
+1. **Major Release** — Quarterly major release kicks off new cycle
+2. **Open Window** (2 weeks) — High-velocity period for ambitious contributions
+3. **Development Phase** — Regular contribution period with normal velocity
+4. **Stabilization Window** (1 week) — Patch-only period before minor releases
+5. **Minor Release** — Monthly feature release (or continue to freeze for quarter-end)
+6. **Freeze Window** — Quarter-end integration testing and release prep
+7. **Release Phase** — Tagged release with artifacts
+
+**Contributor Guidance:**
+- **Want to add major features?** → Target the Open Window after major releases
+- **Want to contribute regularly?** → Development Phase is open for all contributions
+- **Found a bug?** → Patches welcome anytime, especially in Stabilization Windows
+- **Quarter ending soon?** → Be aware of Freeze Window—major work should wait
 
 ---
 
