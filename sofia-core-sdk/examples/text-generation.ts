@@ -10,4 +10,4 @@ async function main() {
   console.log("Text Response:", response);
 }
 
-main();
+main().catch(console.error);

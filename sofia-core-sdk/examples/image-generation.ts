@@ -10,4 +10,4 @@ async function main() {
   console.log("Image Result:", result);
 }
 
-main();
+main().catch(console.error);

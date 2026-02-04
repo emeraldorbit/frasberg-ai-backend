@@ -10,4 +10,4 @@ async function main() {
   console.log("Video Result:", result);
 }
 
-main();
+main().catch(console.error);
