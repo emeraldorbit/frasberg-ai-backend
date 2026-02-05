@@ -6,6 +6,15 @@ Thank you for your interest in contributing to the Sofia Core SDK. This document
 
 This project adheres to professional standards of conduct. By participating, you are expected to uphold this code.
 
+## Governance
+
+Before contributing, please review:
+- [Maintainer Oath](../.github/MAINTAINER_OATH.md) - Our constitutional commitment
+- [Code Review Rubric](../.github/CODE_REVIEW_RUBRIC.md) - How PRs are evaluated
+- [Issue Triage Protocol](../.github/ISSUE_TRIAGE.md) - How issues are handled
+
+These ensure every contribution aligns with the SDK's identity and principles.
+
 ## How Can I Contribute?
 
 ### Reporting Bugs
