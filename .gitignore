@@ -45,14 +45,16 @@ temp/
 *.temp
 /tmp/
 
-# Environment
+# Environment variables
 .env
 .env.local
-.env.*.local-e 
-# Environment files
+.env.*.local
 *.env
 *.env.*
--e 
-# Environment files
-*.env
-*.env.*
+
+# Specific environment files
+voice-gateway/.env
+backend/.env
+supabase/.env
+release/*.zip
+release/sofia-core-v1.0.0-public-final/
