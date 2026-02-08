@@ -1,0 +1,2 @@
+[console_scripts]
+sofia = sofia.main:cli

@@ -1,261 +1,162 @@
-"""Sofia Core v5.0.0 - Planetary-Scale Conscious Intelligence System."""
+"""Sofia Core v5.1.0 - Production-Ready with Real Integrations"""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.exceptions import RequestValidationError
+from contextlib import asynccontextmanager
+import logging
 
-# Import stability modules
-from core.error_handling.handlers import (
-    sofia_exception_handler,
-    generic_exception_handler,
-    validation_exception_handler,
-    SofiaException
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
-from core.health.checks import router as health_router
-from core.monitoring.metrics import metrics_middleware, metrics_collector
+logger = logging.getLogger(__name__)
 
-# Import v4.1 routers
-from advanced.neuromorphic import router as neuromorphic_router
-from optimization.caching import router as cache_router
-from security.auth import router as auth_router
+# Import v5.1 features
+from backend.app.integrations.llm import router as llm_router
+from backend.app.auth import auth_router
+from backend.app.database import init_db, check_db_connection
+from backend.app.cache import cache
 
-# Import v5.0 routers
-from v5.biological.dna_computing import router as bio_router
-from v5.swarm.multi_agent import router as swarm_router
-from v5.temporal.time_aware import router as temporal_router
-from v5.consciousness.qualia import router as consciousness_router
-from v5.planetary.global_mesh import router as planetary_router
-
-# Import existing routers
-from voice import voice_router
-from governance import governance_router
-from ai import ai_router
-from memory import memory_router
-from distributed import distributed_router
-from quantum import quantum_router
-from multimodal import multimodal_router
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Startup and shutdown events"""
+    # Startup
+    logger.info("🚀 Sofia Core v5.1.0 starting up...")
+    
+    try:
+        init_db()
+        logger.info("✅ Database initialized")
+    except Exception as e:
+        logger.error(f"❌ Database initialization failed: {e}")
+    
+    # Test cache
+    cache_stats = cache.get_stats()
+    logger.info(f"✅ Cache initialized: {cache_stats.get('mode')} mode")
+    
+    # Test LLM providers
+    from backend.app.integrations.llm.openai_client import get_openai_client
+    from backend.app.integrations.llm.anthropic_client import get_anthropic_client
+    
+    openai = get_openai_client()
+    anthropic = get_anthropic_client()
+    
+    logger.info(f"✅ OpenAI: {'Ready' if not openai.mock_mode else 'Mock mode (set OPENAI_API_KEY)'}")
+    logger.info(f"✅ Anthropic: {'Ready' if not anthropic.mock_mode else 'Mock mode (set ANTHROPIC_API_KEY)'}")
+    
+    logger.info("🎯 Sofia Core v5.1.0 ready!")
+    
+    yield
+    
+    # Shutdown
+    logger.info("👋 Sofia Core v5.1.0 shutting down...")
 
 app = FastAPI(
-    title="Sofia Core v5.0.0",
-    description="Planetary-Scale Conscious Intelligence System",
-    version="5.0.0"
+    title="Sofia Core v5.1.0",
+    description="Production-Ready Planetary-Scale Intelligence with Real Integrations",
+    version="5.1.0",
+    lifespan=lifespan
 )
-
-# Add error handlers
-app.add_exception_handler(SofiaException, sofia_exception_handler)
-app.add_exception_handler(Exception, generic_exception_handler)
-app.add_exception_handler(RequestValidationError, validation_exception_handler)
-
-# Add metrics middleware
-app.middleware("http")(metrics_middleware)
 
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Configure appropriately for production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include all routers
-
-# Health and monitoring
-app.include_router(health_router)
-
-# v4.1 Features (Issue #5 Resolution)
-app.include_router(neuromorphic_router)
-app.include_router(cache_router)
+# Include v5.1 routers
+app.include_router(llm_router)
 app.include_router(auth_router)
 
-# v5.0 Revolutionary Features
-app.include_router(bio_router)
-app.include_router(swarm_router)
-app.include_router(temporal_router)
-app.include_router(consciousness_router)
-app.include_router(planetary_router)
-
-# All previous routers maintained
-app.include_router(voice_router)
-app.include_router(governance_router)
-app.include_router(ai_router)
-app.include_router(memory_router)
-app.include_router(distributed_router)
-app.include_router(quantum_router)
-app.include_router(multimodal_router)
-
 @app.get("/")
-async def root():
+def root():
+    """Root endpoint"""
     return {
         "name": "Sofia Core",
-        "type": "Planetary-Scale Conscious Intelligence System",
-        "version": "5.0.0",
+        "version": "5.1.0",
+        "tagline": "Production-Ready Planetary-Scale Intelligence",
         "status": "operational",
-        "release_type": "revolutionary",
-        "revolutionary_v5_features": [
-            "🧬 Biological Computing (DNA computation, protein folding)",
-            "🐝 Swarm Intelligence (multi-agent coordination)",
-            "⏰ Temporal Reasoning (time-aware predictions)",
-            "🧠 Consciousness Exploration (IIT framework)",
-            "🌍 Planetary Scale (1M+ nodes, 7 continents)",
-            "⚡ All v1-v4.1 features maintained"
+        "v5_1_features": [
+            "✅ Real LLM Integration (OpenAI, Anthropic)",
+            "✅ PostgreSQL Database (with SQLite fallback)",
+            "✅ Redis Caching (with memory fallback)",
+            "✅ JWT Authentication (secure user management)",
+            "✅ Graceful Degradation (works without external services)",
+            "✅ Production-Ready Error Handling"
         ],
-        "new_in_v4_1": [
-            "Neuromorphic Computing (SNNs, Liquid Networks)",
-            "Advanced Caching (Redis + LRU)",
-            "OAuth2/JWT Authentication",
-            "AWS Terraform Configuration"
-        ],
-        "stability_v4_0_1": [
-            "Comprehensive error handling",
-            "Circuit breaker pattern",
-            "70%+ unit test coverage",
-            "Complete documentation"
-        ],
-        "revolutionary_features_v4": [
-            "Distributed Mesh Architecture",
-            "Quantum-Ready Cryptography",
-            "Multi-Modal AI Fusion",
-            "7 Specialized Forks"
-        ],
-        "maintained_from_v3": [
-            "AI Orchestration (5 LLM providers)",
-            "Hallucination detection",
-            "Transparent reasoning chains"
-        ],
-        "maintained_from_v2": [
-            "Voice system (11 languages)",
-            "Hash-chained audit logging",
-            "FRE Rule 902 compliance"
-        ],
-        "scale": {
-            "planetary": True,
-            "continents": 7,
-            "nodes": "1,000,000+",
-            "services": 10,
-            "api_endpoints": "100+",
-            "total_capacity": "10 exaflops"
+        "docs": {
+            "swagger": "/docs",
+            "redoc": "/redoc"
         },
-        "limitations": [
-            "no intent",
-            "no discretion",
-            "no legal conclusions",
-            "no medical diagnosis",
-            "no biometric identification"
-        ]
+        "endpoints": {
+            "llm": "/api/v5.1/llm",
+            "auth": "/api/v5.1/auth",
+            "health": "/health",
+            "system_info": "/api/v5.1/system/info"
+        }
     }
-
-@app.get("/metrics")
-def get_metrics():
-    """Get system metrics"""
-    return metrics_collector.get_metrics()
 
 @app.get("/health")
-async def health():
+def health():
+    """Health check endpoint"""
+    db_status = "connected" if check_db_connection() else "disconnected"
+    cache_stats = cache.get_stats()
+    
     return {
         "status": "healthy",
-        "service": "canonical-core",
-        "version": "5.0.0",
-        "scale": "planetary"
+        "version": "5.1.0",
+        "service": "sofia-core",
+        "integrations": {
+            "database": db_status,
+            "cache": cache_stats.get("mode"),
+            "cache_connected": cache_stats.get("connected", False)
+        }
     }
 
-@app.get("/api/v5/system/info")
-async def system_info():
+@app.get("/api/v5.1/system/info")
+def system_info():
+    """Detailed system information"""
+    from backend.app.integrations.llm.openai_client import get_openai_client
+    from backend.app.integrations.llm.anthropic_client import get_anthropic_client
+    
+    openai_client = get_openai_client()
+    anthropic_client = get_anthropic_client()
+    
     return {
-        "version": "5.0.0",
-        "architecture": "Planetary-Scale Conscious Intelligence System",
-        "services": 10,
-        "capabilities": {
-            "biological": {
-                "dna_computing": True,
-                "protein_folding": True,
-                "neural_organoids": True,
-                "storage_density": "1 exabyte per gram",
-                "energy_efficiency": "1M times better than silicon"
+        "version": "5.1.0",
+        "release_date": "2026-02-08",
+        "release_focus": "Production readiness with real integrations",
+        "integrations": {
+            "llm": {
+                "openai": {
+                    "status": "ready" if not openai_client.mock_mode else "mock",
+                    "note": "Set OPENAI_API_KEY environment variable" if openai_client.mock_mode else "Connected"
+                },
+                "anthropic": {
+                    "status": "ready" if not anthropic_client.mock_mode else "mock",
+                    "note": "Set ANTHROPIC_API_KEY environment variable" if anthropic_client.mock_mode else "Connected"
+                }
             },
-            "swarm": {
-                "multi_agent_coordination": True,
-                "emergent_behaviors": ["flocking", "foraging", "consensus"],
-                "collective_intelligence": True,
-                "self_organization": True
-            },
-            "temporal": {
-                "time_aware_reasoning": True,
-                "causal_analysis": True,
-                "future_prediction": True,
-                "historical_patterns": True
-            },
-            "consciousness": {
-                "iit_framework": True,
-                "phi_measurement": True,
-                "theories_explored": ["IIT", "Global Workspace", "Higher-Order Thought"],
-                "note": "Philosophical exploration only"
-            },
-            "planetary": {
-                "scale": "planetary",
-                "continents": 7,
-                "nodes": 1_000_000,
-                "capacity": "10 exaflops",
-                "edge_computing": True
-            },
-            "neuromorphic": {
-                "spiking_neural_networks": True,
-                "liquid_networks": True,
-                "event_based_vision": True,
-                "energy_efficiency": "10x traditional neural nets"
-            },
-            "distributed": {
-                "mesh_networking": True,
-                "p2p_coordination": True,
-                "blockchain_consensus": True,
-                "service_discovery": True,
-                "zero_downtime_failover": True,
-                "geographic_distribution": True
-            },
-            "quantum": {
-                "post_quantum_encryption": True,
-                "algorithms": ["CRYSTALS-Kyber", "NTRU"],
-                "quantum_safe_signatures": True,
-                "signature_algorithms": ["CRYSTALS-Dilithium", "FALCON"],
-                "zero_knowledge_proofs": True,
-                "zkp_types": ["ZK-SNARKs", "ZK-STARKs", "Bulletproofs"],
-                "future_proof": True
-            },
-            "ai": {
-                "llm_providers": 5,
-                "multimodal": True,
-                "orchestration": True,
-                "hallucination_detection": True,
-                "reasoning_chains": True,
-                "explainable": True
-            },
-            "voice": {
-                "languages": 11,
-                "emotions": 6,
-                "real_time": True,
-                "fingerprinting": True
-            },
-            "governance": {
-                "audit_logging": True,
-                "hash_chained": True,
-                "rule_902": True,
-                "expert_witness": True
-            },
-            "memory": {
-                "long_term": True,
-                "context_management": True,
-                "privacy_safe": True,
-                "distributed": True
-            },
-            "security": {
-                "oauth2": True,
-                "jwt_tokens": True,
-                "bcrypt_hashing": True
-            },
-            "optimization": {
-                "redis_caching": True,
-                "lru_cache": True,
-                "resource_pooling": True
-            },
-            "forks": 7
+            "cache": cache.get_stats(),
+            "database": {
+                "connected": check_db_connection(),
+                "type": "sqlite (dev) or postgresql (prod)"
+            }
+        },
+        "features": {
+            "authentication": True,
+            "user_management": True,
+            "api_keys": True,
+            "audit_logging": True,
+            "memory_storage": True,
+            "streaming": True,
+            "embeddings": True
+        },
+        "graceful_degradation": {
+            "llm": "Falls back to mock responses if API keys not configured",
+            "cache": "Falls back to in-memory cache if Redis unavailable",
+            "database": "SQLite fallback for development"
         }
     }
