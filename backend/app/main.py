@@ -1,13 +1,15 @@
-"""Sofia Core v2.0.0 - Main FastAPI Application with Voice & Governance."""
+"""Sofia Core v3.0.0 - Main FastAPI Application with AI Orchestration."""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from voice import voice_router
 from governance import governance_router
+from ai import ai_router
+from memory import memory_router
 
 app = FastAPI(
-    title="Sofia Core v2.0.0",
-    description="Institution-Grade Operational Intelligence with Voice & Governance",
-    version="2.0.0"
+    title="Sofia Core v3.0.0",
+    description="Autonomous Institution-Grade Operational Intelligence",
+    version="3.0.0"
 )
 
 # CORS
@@ -19,23 +21,34 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include v2.0.0 routers
+# Include all routers
 app.include_router(voice_router)
 app.include_router(governance_router)
+app.include_router(ai_router)
+app.include_router(memory_router)
 
 @app.get("/")
 async def root():
     return {
         "name": "Sofia Core",
-        "type": "Institution-Grade Operational Intelligence",
-        "version": "2.0.0",
+        "type": "Autonomous Institution-Grade Operational Intelligence",
+        "version": "3.0.0",
         "status": "operational",
-        "new_features": [
-            "Voice system (TTS/STT, WebRTC, 11 languages)",
-            "Governance system (hash-chained audit, Rule 902)",
-            "Expert witness mode",
-            "Voice fingerprinting (non-biometric)",
-            "Real-time streaming"
+        "new_features_v3": [
+            "AI Orchestration Layer (5 LLM providers)",
+            "Hallucination detection & validation",
+            "Transparent reasoning chains",
+            "Long-term memory system",
+            "Context management",
+            "Legal Fork (port 8003)",
+            "Research Fork (port 8004)",
+            "Prompt engineering framework"
+        ],
+        "maintained_from_v2": [
+            "Voice system (11 languages)",
+            "Hash-chained audit logging",
+            "FRE Rule 902 compliance",
+            "Expert witness mode"
         ],
         "limitations": [
             "no intent",
@@ -43,7 +56,8 @@ async def root():
             "no legal conclusions",
             "no medical diagnosis",
             "no biometric identification",
-            "voice fingerprints are audit-only (not identification)"
+            "voice fingerprints are audit-only (not identification)",
+            "AI responses validated against scope limits"
         ]
     }
 
@@ -52,38 +66,40 @@ async def health():
     return {
         "status": "healthy",
         "service": "canonical-core",
-        "version": "2.0.0"
+        "version": "3.0.0"
     }
 
-@app.get("/api/v2/capabilities")
-async def get_capabilities():
+@app.get("/api/v3/system/info")
+async def system_info():
     return {
-        "version": "2.0.0",
+        "version": "3.0.0",
+        "architecture": "45-layer sovereign + AI orchestration + memory",
+        "services": 7,  # Canonical + Education + Healthcare + Analytics + Frontend + Legal + Research
         "capabilities": {
-            "voice_synthesis": {
-                "enabled": True,
+            "ai": {
+                "llm_providers": 5,
+                "orchestration": True,
+                "hallucination_detection": True,
+                "reasoning_chains": True,
+                "explainable": True
+            },
+            "voice": {
                 "languages": 11,
                 "emotions": 6,
-                "speakers": 4
+                "real_time": True,
+                "fingerprinting": True
             },
-            "speech_recognition": {
-                "enabled": True,
-                "languages": 11,
-                "real_time": True
-            },
-            "audit_logging": {
-                "enabled": True,
+            "governance": {
+                "audit_logging": True,
                 "hash_chained": True,
-                "rule_902_compliant": True
+                "rule_902": True,
+                "expert_witness": True
             },
-            "expert_witness": {
-                "enabled": True,
-                "court_ready": True
+            "memory": {
+                "long_term": True,
+                "context_management": True,
+                "privacy_safe": True
             },
-            "voice_fingerprinting": {
-                "enabled": True,
-                "biometric": False,
-                "audit_only": True
-            }
+            "forks": 4  # Education, Healthcare, Legal, Research
         }
     }
