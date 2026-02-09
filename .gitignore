@@ -20,6 +20,19 @@ supabase/**/*.d.ts.map
 # Coverage
 coverage/
 .nyc_output/
+htmlcov/
+.coverage
+.coverage.*
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
 
 # IDE
 .vscode/
