@@ -10,7 +10,7 @@ if os.path.exists(readme_path):
 
 setup(
     name='sofia-cli',
-    version='5.0.0',
+    version='6.0.0',
     packages=find_packages(),
     install_requires=[
         'click>=8.0.0',

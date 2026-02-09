@@ -5,7 +5,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='sofia-sdk',
-    version='5.0.0',
+    version='6.0.0',
     packages=find_packages(),
     install_requires=[
         'requests>=2.28.0',
