@@ -131,3 +131,23 @@ redis==5.0.1
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 python-multipart==0.0.6
+
+# v6.5.0 Optional Integration Dependencies
+# Install with: pip install transformers torch wandb mlflow prefect dagster
+
+# Hugging Face Transformers (optional)
+# transformers>=4.36.0
+# torch>=2.1.0
+
+# Weights & Biases (optional)
+# wandb>=0.16.0
+
+# MLflow (optional)
+# mlflow>=2.9.0
+
+# Prefect (optional)
+# prefect>=2.14.0
+
+# Dagster (optional)
+# dagster>=1.5.0
+
