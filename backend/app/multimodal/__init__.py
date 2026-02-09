@@ -2,6 +2,13 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 
+# New 6.6.0 Multimodal AI Components
+try:
+    from .multimodal_ai import MultimodalAI
+    MULTIMODAL_AI_AVAILABLE = True
+except ImportError:
+    MULTIMODAL_AI_AVAILABLE = False
+
 multimodal_router = APIRouter(prefix="/api/v4/multimodal", tags=["multimodal-ai"])
 
 class MultiModalRequest(BaseModel):
