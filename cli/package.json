@@ -1,0 +1,30 @@
+{
+  "name": "@emerald-estates/sofia-cli",
+  "version": "1.0.0",
+  "description": "Command-line interface for Sofia Core",
+  "main": "index.js",
+  "bin": {
+    "sofia": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "sofia",
+    "sofia-core",
+    "ai",
+    "cli",
+    "chat",
+    "api"
+  ],
+  "author": "Emerald Estates",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emeraldorbit/sofia-core-backend.git",
+    "directory": "cli"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

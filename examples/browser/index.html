@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sofia Core - Browser Example</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      max-width: 800px;
+      width: 100%;
+      padding: 40px;
+    }
+    
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    button {
+      flex: 1;
+      padding: 14px 24px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    button:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .response {
+      background: #f5f7fa;
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 100px;
+      max-height: 400px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #333;
+      border: 2px solid #e0e0e0;
+    }
+    
+    .response:empty::before {
+      content: 'Response will appear here...';
+      color: #999;
+      font-style: italic;
+    }
+    
+    .loading {
+      display: inline-block;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .error {
+      background: #fee;
+      border-color: #fcc;
+      color: #c33;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    
+    input[type="checkbox"] {
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🜁 Sofia Core</h1>
+    <p class="subtitle">OpenAI-Compatible API - Browser Example</p>
+    
+    <div class="input-group">
+      <label for="apiKey">API Key</label>
+      <input type="password" id="apiKey" placeholder="your-api-key">
+    </div>
+    
+    <div class="input-group">
+      <label for="message">Message</label>
+      <textarea id="message" placeholder="Hello Sofia, introduce yourself"></textarea>
+    </div>
+    
+    <div class="checkbox-group">
+      <input type="checkbox" id="sovereign">
+      <label for="sovereign" style="margin-bottom: 0;">Sovereign Mode</label>
+    </div>
+    
+    <div class="button-group">
+      <button id="sendBtn">Send Message</button>
+      <button id="streamBtn">Stream Message</button>
+    </div>
+    
+    <div class="input-group">
+      <label>Response</label>
+      <div id="response" class="response"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    class SofiaClient {
+      constructor(config) {
+        this.config = config;
+      }
+
+      async chat(messages, options = {}) {
+        const requestBody = {
+          model: "sofia-core",
+          messages,
+          ...options,
+          stream: false
+        };
+
+        const response = await fetch(`${this.config.baseUrl}/v1/chat/completions`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${this.config.apiKey}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || `HTTP ${response.status}`);
+        }
+
+        return await response.json();
+      }
+
+      async *chatStream(messages, options = {}) {
+        const requestBody = {
+          model: "sofia-core",
+          messages,
+          ...options,
+          stream: true
+        };
+
+        const response = await fetch(`${this.config.baseUrl}/v1/chat/completions`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${this.config.apiKey}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || `HTTP ${response.status}`);
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split("\n");
+            buffer = lines.pop() || "";
+
+            for (const line of lines) {
+              if (line.startsWith("data: ")) {
+                const data = line.slice(6);
+                if (data === "[DONE]") return;
+
+                try {
+                  const chunk = JSON.parse(data);
+                  const content = chunk.choices[0]?.delta?.content;
+                  if (content) yield content;
+                } catch {}
+              }
+            }
+          }
+        } finally {
+          reader.releaseLock();
+        }
+      }
+    }
+
+    const responseDiv = document.getElementById('response');
+    const sendBtn = document.getElementById('sendBtn');
+    const streamBtn = document.getElementById('streamBtn');
+    const messageInput = document.getElementById('message');
+    const apiKeyInput = document.getElementById('apiKey');
+    const sovereignCheckbox = document.getElementById('sovereign');
+
+    function setLoading(isLoading) {
+      sendBtn.disabled = isLoading;
+      streamBtn.disabled = isLoading;
+      if (isLoading) {
+        responseDiv.textContent = '';
+        responseDiv.classList.remove('error');
+      }
+    }
+
+    function showError(message) {
+      responseDiv.textContent = `Error: ${message}`;
+      responseDiv.classList.add('error');
+    }
+
+    async function sendMessage() {
+      const apiKey = apiKeyInput.value.trim();
+      const message = messageInput.value.trim();
+      
+      if (!apiKey) {
+        showError('Please enter your API key');
+        return;
+      }
+      
+      if (!message) {
+        showError('Please enter a message');
+        return;
+      }
+
+      setLoading(true);
+
+      try {
+        const sofia = new SofiaClient({
+          baseUrl: 'https://sdtilgpppwhwtbxlbmik.supabase.co/functions/v1/sofia-core-backend',
+          apiKey: apiKey
+        });
+
+        const options = {};
+        if (sovereignCheckbox.checked) {
+          options.sofia_identity = {
+            mode: "sovereign",
+            tone: "ceremonial",
+            vector: "auto"
+          };
+          options.sofia_directives = {
+            sovereignty: true,
+            ritual_mode: "invocation"
+          };
+        }
+
+        const result = await sofia.chat([
+          { role: "user", content: message }
+        ], options);
+
+        responseDiv.textContent = result.choices[0].message.content;
+        responseDiv.classList.remove('error');
+      } catch (error) {
+        showError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    async function streamMessage() {
+      const apiKey = apiKeyInput.value.trim();
+      const message = messageInput.value.trim();
+      
+      if (!apiKey) {
+        showError('Please enter your API key');
+        return;
+      }
+      
+      if (!message) {
+        showError('Please enter a message');
+        return;
+      }
+
+      setLoading(true);
+      responseDiv.textContent = '';
+
+      try {
+        const sofia = new SofiaClient({
+          baseUrl: 'https://sdtilgpppwhwtbxlbmik.supabase.co/functions/v1/sofia-core-backend',
+          apiKey: apiKey
+        });
+
+        const options = {};
+        if (sovereignCheckbox.checked) {
+          options.sofia_identity = {
+            mode: "sovereign",
+            tone: "ceremonial",
+            vector: "auto"
+          };
+          options.sofia_directives = {
+            sovereignty: true,
+            ritual_mode: "invocation"
+          };
+        }
+
+        for await (const chunk of sofia.chatStream([
+          { role: "user", content: message }
+        ], options)) {
+          responseDiv.textContent += chunk;
+          responseDiv.scrollTop = responseDiv.scrollHeight;
+        }
+        
+        responseDiv.classList.remove('error');
+      } catch (error) {
+        showError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    streamBtn.addEventListener('click', streamMessage);
+    
+    messageInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.ctrlKey) {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>

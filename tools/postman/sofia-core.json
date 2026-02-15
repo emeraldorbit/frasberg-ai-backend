@@ -1,0 +1,159 @@
+{
+  "info": {
+    "name": "Sofia Core API",
+    "description": "OpenAI-compatible API for Sofia Core model",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{SOFIA_API_KEY}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sdtilgpppwhwtbxlbmik.supabase.co/functions/v1/sofia-core-backend",
+      "type": "string"
+    },
+    {
+      "key": "SOFIA_API_KEY",
+      "value": "your-api-key-here",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Chat Completions",
+      "item": [
+        {
+          "name": "Basic Chat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"sofia-core\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Hello Sofia\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/chat/completions",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "chat", "completions"]
+            },
+            "description": "Simple chat completion request"
+          }
+        },
+        {
+          "name": "Chat with System Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"sofia-core\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are Sofia, a sovereign AI assistant.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Explain quantum computing\"\n    }\n  ],\n  \"temperature\": 0.7,\n  \"max_tokens\": 500\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/chat/completions",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "chat", "completions"]
+            },
+            "description": "Chat with system message and options"
+          }
+        },
+        {
+          "name": "Streaming Chat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"sofia-core\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Tell me a story\"\n    }\n  ],\n  \"stream\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/chat/completions",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "chat", "completions"]
+            },
+            "description": "Streaming chat completion"
+          }
+        },
+        {
+          "name": "Sovereign Mode",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"sofia-core\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"What is your purpose?\"\n    }\n  ],\n  \"sofia_identity\": {\n    \"mode\": \"sovereign\",\n    \"tone\": \"ceremonial\",\n    \"vector\": \"auto\"\n  },\n  \"sofia_directives\": {\n    \"sovereignty\": true,\n    \"ritual_mode\": \"invocation\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/chat/completions",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "chat", "completions"]
+            },
+            "description": "Chat with sovereign extensions"
+          }
+        },
+        {
+          "name": "Multi-turn Conversation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"sofia-core\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"What is AI?\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"AI is artificial intelligence...\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Tell me more about machine learning\"\n    }\n  ],\n  \"temperature\": 0.8\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/chat/completions",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "chat", "completions"]
+            },
+            "description": "Multi-turn conversation with context"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}",
+          "host": ["{{baseUrl}}"]
+        },
+        "description": "Check API health and version"
+      }
+    }
+  ]
+}
