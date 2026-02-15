@@ -1,0 +1,27 @@
+{
+  "name": "@emerald-estates/sofia-core",
+  "version": "1.0.0",
+  "description": "TypeScript SDK for Sofia Core - OpenAI-compatible API with sovereign extensions",
+  "main": "sofia.ts",
+  "types": "sofia.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "sofia",
+    "sofia-core",
+    "ai",
+    "openai",
+    "chat",
+    "api",
+    "typescript"
+  ],
+  "author": "Emerald Estates",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emeraldorbit/sofia-core-backend.git",
+    "directory": "sdk/typescript"
+  }
+}

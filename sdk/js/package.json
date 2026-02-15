@@ -1,0 +1,27 @@
+{
+  "name": "@emerald-estates/sofia-client",
+  "version": "1.0.0",
+  "description": "JavaScript SDK for Sofia Core - OpenAI-compatible API with sovereign extensions",
+  "main": "sofia-client.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "sofia",
+    "sofia-core",
+    "ai",
+    "openai",
+    "chat",
+    "api",
+    "javascript",
+    "browser"
+  ],
+  "author": "Emerald Estates",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emeraldorbit/sofia-core-backend.git",
+    "directory": "sdk/js"
+  }
+}

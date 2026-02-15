@@ -1,6 +1,6 @@
 # Sofia SDK for Python
 
-Official Python SDK for Sofia Core v5.0.0.
+Official Python SDK for Sofia Core - Includes OpenAI-compatible client.
 
 ## Installation
 
@@ -9,6 +9,27 @@ pip install sofia-sdk
 ```
 
 ## Quick Start
+
+### OpenAI-Compatible Client
+
+```python
+from sofia_sdk import SofiaCoreClient
+
+# Initialize client
+client = SofiaCoreClient(
+    base_url="https://sdtilgpppwhwtbxlbmik.supabase.co/functions/v1/sofia-core-backend",
+    api_key="your-api-key"
+)
+
+# Basic chat
+result = client.chat([
+    {"role": "user", "content": "Hello Sofia"}
+])
+
+print(result["choices"][0]["message"]["content"])
+```
+
+### Original Client (for v5.0.0 features)
 
 ```python
 from sofia_sdk import SofiaClient
