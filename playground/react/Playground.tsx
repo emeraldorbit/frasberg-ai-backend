@@ -340,7 +340,7 @@ const Playground: React.FC = () => {
           </div>
         </div>
         <div className="keyboard-hint">
-          Press Enter to send • Shift+Enter for new line • Ctrl+L to clear
+          Press Enter to send • Shift+Enter for new line
         </div>
       </div>
     </div>

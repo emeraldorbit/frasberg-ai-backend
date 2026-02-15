@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="keyboard-hint">
-        Press Enter to send • Shift+Enter for new line • Ctrl+L to clear
+        Press Enter to send • Shift+Enter for new line
       </div>
     </div>
   </div>
