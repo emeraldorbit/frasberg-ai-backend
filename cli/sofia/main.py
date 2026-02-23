@@ -85,26 +85,28 @@ def speak(text, language, emotion):
 
 @cli.command()
 @click.argument('prompt')
-@click.option('--provider', default=None, help='LLM provider (openai, anthropic, etc.)')
-def generate(prompt, provider):
-    """Generate AI response"""
+@click.option('--model', default='sofia-core', help='Model name (sofia-core uses server defaults)')
+def generate(prompt, model):
+    """Generate AI response via canonical endpoint"""
     try:
-        payload = {"prompt": prompt}
-        if provider:
-            payload["provider"] = provider
-        
+        payload = {
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+        }
+
         response = requests.post(
-            f"{BASE_URL}/api/v3/ai/llm/generate",
+            f"{BASE_URL}/api/llm/generate",
             json=payload
         )
-        
+
         if response.status_code == 200:
             data = response.json()
             rprint(f"\n[cyan]Response:[/cyan]")
-            rprint(data.get('response'))
-            rprint(f"\n[dim]Provider: {data.get('provider')} | Model: {data.get('model')} | Confidence: {data.get('confidence_score'):.2f}[/dim]")
+            rprint(data.get('output'))
+            usage = data.get('usage', {})
+            rprint(f"\n[dim]Input tokens: {usage.get('input_tokens')} | Output tokens: {usage.get('output_tokens')}[/dim]")
         else:
-            rprint(f"[red]✗[/red] Generation failed")
+            rprint(f"[red]✗[/red] Generation failed: {response.text}")
     except Exception as e:
         rprint(f"[red]✗[/red] Error: {e}")
 
