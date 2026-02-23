@@ -11,7 +11,7 @@ from typing import List, Optional, Tuple
 
 import httpx
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +33,14 @@ class Message(BaseModel):
 
 
 class GenerateRequest(BaseModel):
-    model: Optional[str] = None
+    model: Optional[str] = Field(
+        default=None,
+        description=(
+            "Model to use for generation. Pass ``'sofia-core'`` or omit to use "
+            "the ``SOFIA_CORE_MODEL`` environment variable (default: ``gpt-4.1``). "
+            "Any other value is forwarded verbatim to the provider."
+        ),
+    )
     messages: List[Message]
 
 
@@ -183,8 +190,6 @@ async def generate(request: GenerateRequest) -> GenerateResponse:
     provider = os.getenv("LLM_PROVIDER", "openai").lower()
     api_key = os.getenv("LLM_API_KEY")
     model = _resolve_model(request.model)
-    temperature = float(os.getenv("SOFIA_CORE_TEMPERATURE", str(_DEFAULT_TEMPERATURE)))
-    max_tokens = int(os.getenv("SOFIA_CORE_MAX_TOKENS", str(_DEFAULT_MAX_TOKENS)))
 
     if not api_key:
         raise HTTPException(
@@ -194,6 +199,26 @@ async def generate(request: GenerateRequest) -> GenerateResponse:
                 "Set the LLM_API_KEY environment variable to enable LLM generation."
             ),
         )
+
+    try:
+        temperature = float(os.getenv("SOFIA_CORE_TEMPERATURE", str(_DEFAULT_TEMPERATURE)))
+        if not 0.0 <= temperature <= 2.0:
+            raise ValueError
+    except ValueError:
+        logger.warning(
+            "SOFIA_CORE_TEMPERATURE is invalid; falling back to %.1f", _DEFAULT_TEMPERATURE
+        )
+        temperature = _DEFAULT_TEMPERATURE
+
+    try:
+        max_tokens = int(os.getenv("SOFIA_CORE_MAX_TOKENS", str(_DEFAULT_MAX_TOKENS)))
+        if max_tokens < 1:
+            raise ValueError
+    except ValueError:
+        logger.warning(
+            "SOFIA_CORE_MAX_TOKENS is invalid; falling back to %d", _DEFAULT_MAX_TOKENS
+        )
+        max_tokens = _DEFAULT_MAX_TOKENS
 
     messages = [m.model_dump() for m in request.messages]
 

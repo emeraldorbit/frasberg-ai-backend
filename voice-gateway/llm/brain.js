@@ -12,7 +12,7 @@ async function _callCanonical(messages) {
   });
 
   if (!response.ok) {
-    throw new Error(`Canonical LLM request failed: ${response.statusText}`);
+    throw new Error(`Canonical LLM request failed at ${CANONICAL_ENDPOINT}: ${response.statusText}`);
   }
 
   const result = await response.json();
