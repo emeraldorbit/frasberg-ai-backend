@@ -35,13 +35,17 @@ async def lifespan(app: FastAPI):
     logger.info(f"✅ Cache initialized: {cache_stats.get('mode')} mode")
     
     # Test LLM providers
+    from fastapi import HTTPException as _HTTPException
     from backend.app.integrations.llm.openai_client import get_openai_client
     from backend.app.integrations.llm.anthropic_client import get_anthropic_client
-    
-    openai = get_openai_client()
+
+    try:
+        get_openai_client()
+        logger.info("✅ OpenAI: Ready")
+    except _HTTPException:
+        logger.info("⚠️ OpenAI: Not configured (set OPENAI_API_KEY)")
+
     anthropic = get_anthropic_client()
-    
-    logger.info(f"✅ OpenAI: {'Ready' if not openai.mock_mode else 'Mock mode (set OPENAI_API_KEY)'}")
     logger.info(f"✅ Anthropic: {'Ready' if not anthropic.mock_mode else 'Mock mode (set ANTHROPIC_API_KEY)'}")
     
     logger.info("🎯 Sofia Core v5.1.0 ready!")
@@ -120,10 +124,16 @@ def health():
 @app.get("/api/v5.1/system/info")
 def system_info():
     """Detailed system information"""
+    from fastapi import HTTPException as _HTTPException
     from backend.app.integrations.llm.openai_client import get_openai_client
     from backend.app.integrations.llm.anthropic_client import get_anthropic_client
-    
-    openai_client = get_openai_client()
+
+    try:
+        get_openai_client()
+        openai_status = {"status": "ready", "note": "Connected"}
+    except _HTTPException:
+        openai_status = {"status": "not_configured", "note": "Set OPENAI_API_KEY environment variable"}
+
     anthropic_client = get_anthropic_client()
     
     return {
@@ -132,10 +142,7 @@ def system_info():
         "release_focus": "Production readiness with real integrations",
         "integrations": {
             "llm": {
-                "openai": {
-                    "status": "ready" if not openai_client.mock_mode else "mock",
-                    "note": "Set OPENAI_API_KEY environment variable" if openai_client.mock_mode else "Connected"
-                },
+                "openai": openai_status,
                 "anthropic": {
                     "status": "ready" if not anthropic_client.mock_mode else "mock",
                     "note": "Set ANTHROPIC_API_KEY environment variable" if anthropic_client.mock_mode else "Connected"
