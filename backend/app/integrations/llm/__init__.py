@@ -58,10 +58,3 @@ async def generate_real(request: GenerateRequest):
 async def list_providers_endpoint():
     """List available LLM providers and their governance status."""
     return {"providers": _list_providers()}
-
-@router.post("/embeddings")
-async def generate_embeddings(text: str, model: str = "text-embedding-3-small"):
-    """Generate embeddings using OpenAI"""
-    from .openai_client import get_openai_client
-    client = get_openai_client()
-    return client.generate_embeddings(text, model)
