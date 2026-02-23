@@ -2,9 +2,9 @@
 
 Tests cover:
 - env-var parsing and model resolution
-- provider routing (openai / anthropic)
+- provider routing via registry
 - response normalisation
-- graceful error handling when env vars are missing or providers unknown
+- graceful error handling when providers are unknown or governance-blocked
 """
 
 import os
@@ -34,45 +34,27 @@ def test_resolve_model_none_uses_env(monkeypatch):
 
 
 def test_resolve_model_sofia_core_uses_env(monkeypatch):
-    monkeypatch.setenv("SOFIA_CORE_MODEL", "gpt-4.1")
-    assert _resolve_model("sofia-core") == "gpt-4.1"
+    monkeypatch.setenv("SOFIA_CORE_MODEL", "llama3")
+    assert _resolve_model("sofia-core") == "llama3"
 
 
 def test_resolve_model_explicit_passes_through(monkeypatch):
-    monkeypatch.setenv("SOFIA_CORE_MODEL", "gpt-4.1")
+    monkeypatch.setenv("SOFIA_CORE_MODEL", "llama3")
     assert _resolve_model("gpt-4o") == "gpt-4o"
 
 
 def test_resolve_model_default_when_env_missing(monkeypatch):
     monkeypatch.delenv("SOFIA_CORE_MODEL", raising=False)
-    assert _resolve_model(None) == "gpt-4.1"
+    assert _resolve_model(None) == "llama3"
 
 
-# ── generate — missing LLM_API_KEY ─────────────────────────────────────────
-
-
-@pytest.mark.asyncio
-async def test_generate_missing_api_key_raises_503(monkeypatch):
-    from fastapi import HTTPException
-
-    monkeypatch.delenv("LLM_API_KEY", raising=False)
-    monkeypatch.setenv("LLM_PROVIDER", "openai")
-
-    req = GenerateRequest(messages=[Message(role="user", content="hello")])
-    with pytest.raises(HTTPException) as exc_info:
-        await generate(req)
-    assert exc_info.value.status_code == 503
-    assert "LLM_API_KEY" in exc_info.value.detail
-
-
-# ── generate — unknown provider ────────────────────────────────────────────
+# ── generate — unknown provider raises 400 via registry ───────────────────
 
 
 @pytest.mark.asyncio
 async def test_generate_unknown_provider_raises_400(monkeypatch):
     from fastapi import HTTPException
 
-    monkeypatch.setenv("LLM_API_KEY", "test-key")
     monkeypatch.setenv("LLM_PROVIDER", "unknown_provider")
 
     req = GenerateRequest(messages=[Message(role="user", content="hello")])
@@ -82,22 +64,68 @@ async def test_generate_unknown_provider_raises_400(monkeypatch):
     assert "unknown_provider" in exc_info.value.detail
 
 
-# ── generate — openai routing ──────────────────────────────────────────────
+# ── generate — cloud provider blocked by governance raises 403 ─────────────
+
+
+@pytest.mark.asyncio
+async def test_generate_cloud_provider_disabled_raises_403(monkeypatch):
+    from fastapi import HTTPException
+
+    monkeypatch.setenv("LLM_PROVIDER", "openai")
+    monkeypatch.delenv("ENABLE_OPENAI", raising=False)
+
+    req = GenerateRequest(messages=[Message(role="user", content="hello")])
+    with pytest.raises(HTTPException) as exc_info:
+        await generate(req)
+    assert exc_info.value.status_code == 403
+    assert "ENABLE_OPENAI" in exc_info.value.detail
+
+
+# ── generate — local provider (default) ───────────────────────────────────
+
+
+@pytest.mark.asyncio
+async def test_generate_default_provider_is_local(monkeypatch):
+    monkeypatch.delenv("LLM_PROVIDER", raising=False)
+    monkeypatch.setenv("SOFIA_CORE_MODEL", "llama3")
+
+    mock_provider = MagicMock()
+    mock_provider.generate = AsyncMock(return_value=("Hello from Ollama", 5, 10))
+
+    with patch(
+        "backend.app.integrations.llm.canonical.get_active_provider",
+        return_value=mock_provider,
+    ), patch(
+        "backend.app.integrations.llm.canonical._log_usage_to_supabase",
+        new_callable=AsyncMock,
+    ):
+        req = GenerateRequest(messages=[Message(role="user", content="hello")])
+        result = await generate(req)
+
+    assert result.output == "Hello from Ollama"
+    assert result.usage.input_tokens == 5
+    assert result.usage.output_tokens == 10
+    mock_provider.generate.assert_awaited_once()
+
+
+# ── generate — openai routing (governance flag set) ────────────────────────
 
 
 @pytest.mark.asyncio
 async def test_generate_routes_to_openai(monkeypatch):
-    monkeypatch.setenv("LLM_API_KEY", "sk-test")
     monkeypatch.setenv("LLM_PROVIDER", "openai")
+    monkeypatch.setenv("ENABLE_OPENAI", "true")
     monkeypatch.setenv("SOFIA_CORE_MODEL", "gpt-4.1")
     monkeypatch.setenv("SOFIA_CORE_TEMPERATURE", "0.2")
     monkeypatch.setenv("SOFIA_CORE_MAX_TOKENS", "4096")
 
+    mock_provider = MagicMock()
+    mock_provider.generate = AsyncMock(return_value=("Hello from OpenAI", 10, 5))
+
     with patch(
-        "backend.app.integrations.llm.canonical._call_openai",
-        new_callable=AsyncMock,
-        return_value=("Hello from OpenAI", 10, 5),
-    ) as mock_openai, patch(
+        "backend.app.integrations.llm.canonical.get_active_provider",
+        return_value=mock_provider,
+    ), patch(
         "backend.app.integrations.llm.canonical._log_usage_to_supabase",
         new_callable=AsyncMock,
     ):
@@ -111,10 +139,10 @@ async def test_generate_routes_to_openai(monkeypatch):
     assert result.output == "Hello from OpenAI"
     assert result.usage.input_tokens == 10
     assert result.usage.output_tokens == 5
-    mock_openai.assert_awaited_once()
+    mock_provider.generate.assert_awaited_once()
     # Verify the resolved model was passed
-    call_args = mock_openai.call_args
-    assert call_args.args[1] == "gpt-4.1"
+    call_args = mock_provider.generate.call_args
+    assert call_args.args[0] == "gpt-4.1"
 
 
 # ── generate — anthropic routing ───────────────────────────────────────────
@@ -122,15 +150,17 @@ async def test_generate_routes_to_openai(monkeypatch):
 
 @pytest.mark.asyncio
 async def test_generate_routes_to_anthropic(monkeypatch):
-    monkeypatch.setenv("LLM_API_KEY", "anthro-key")
     monkeypatch.setenv("LLM_PROVIDER", "anthropic")
+    monkeypatch.setenv("ENABLE_ANTHROPIC", "true")
     monkeypatch.setenv("SOFIA_CORE_MODEL", "claude-3-5-sonnet-20241022")
 
+    mock_provider = MagicMock()
+    mock_provider.generate = AsyncMock(return_value=("Hello from Anthropic", 20, 8))
+
     with patch(
-        "backend.app.integrations.llm.canonical._call_anthropic",
-        new_callable=AsyncMock,
-        return_value=("Hello from Anthropic", 20, 8),
-    ) as mock_anthropic, patch(
+        "backend.app.integrations.llm.canonical.get_active_provider",
+        return_value=mock_provider,
+    ), patch(
         "backend.app.integrations.llm.canonical._log_usage_to_supabase",
         new_callable=AsyncMock,
     ):
@@ -142,7 +172,7 @@ async def test_generate_routes_to_anthropic(monkeypatch):
 
     assert result.output == "Hello from Anthropic"
     assert result.usage.input_tokens == 20
-    mock_anthropic.assert_awaited_once()
+    mock_provider.generate.assert_awaited_once()
 
 
 # ── generate — explicit model override ────────────────────────────────────
@@ -150,15 +180,17 @@ async def test_generate_routes_to_anthropic(monkeypatch):
 
 @pytest.mark.asyncio
 async def test_generate_explicit_model_overrides_env(monkeypatch):
-    monkeypatch.setenv("LLM_API_KEY", "sk-test")
     monkeypatch.setenv("LLM_PROVIDER", "openai")
-    monkeypatch.setenv("SOFIA_CORE_MODEL", "gpt-4.1")
+    monkeypatch.setenv("ENABLE_OPENAI", "true")
+    monkeypatch.setenv("SOFIA_CORE_MODEL", "llama3")
+
+    mock_provider = MagicMock()
+    mock_provider.generate = AsyncMock(return_value=("output", 1, 1))
 
     with patch(
-        "backend.app.integrations.llm.canonical._call_openai",
-        new_callable=AsyncMock,
-        return_value=("output", 1, 1),
-    ) as mock_openai, patch(
+        "backend.app.integrations.llm.canonical.get_active_provider",
+        return_value=mock_provider,
+    ), patch(
         "backend.app.integrations.llm.canonical._log_usage_to_supabase",
         new_callable=AsyncMock,
     ):
@@ -168,8 +200,8 @@ async def test_generate_explicit_model_overrides_env(monkeypatch):
         )
         await generate(req)
 
-    call_args = mock_openai.call_args
-    assert call_args.args[1] == "gpt-4o"
+    call_args = mock_provider.generate.call_args
+    assert call_args.args[0] == "gpt-4o"
 
 
 # ── _log_usage_to_supabase — no Supabase configured ───────────────────────
@@ -185,7 +217,7 @@ async def test_log_usage_skips_when_supabase_not_configured(monkeypatch, caplog)
     from backend.app.integrations.llm.canonical import _log_usage_to_supabase
 
     with caplog.at_level(logging.DEBUG, logger="backend.app.integrations.llm.canonical"):
-        await _log_usage_to_supabase("openai", "gpt-4.1", 10, 5)
+        await _log_usage_to_supabase("local", "llama3", 10, 5)
 
     assert "Supabase not configured" in caplog.text
 
@@ -193,10 +225,9 @@ async def test_log_usage_skips_when_supabase_not_configured(monkeypatch, caplog)
 # ── HTTP endpoint integration ─────────────────────────────────────────────
 
 
-def test_canonical_endpoint_missing_key_returns_503(monkeypatch):
-    """Verify the FastAPI route also returns 503 when LLM_API_KEY is absent."""
-    monkeypatch.delenv("LLM_API_KEY", raising=False)
-    monkeypatch.setenv("LLM_PROVIDER", "openai")
+def test_canonical_endpoint_unknown_provider_returns_400(monkeypatch):
+    """Verify the FastAPI route returns 400 for unknown provider."""
+    monkeypatch.setenv("LLM_PROVIDER", "bogus")
 
     from fastapi import FastAPI
     from fastapi.testclient import TestClient
@@ -214,4 +245,28 @@ def test_canonical_endpoint_missing_key_returns_503(monkeypatch):
             "messages": [{"role": "user", "content": "hello"}],
         },
     )
-    assert response.status_code == 503
+    assert response.status_code == 400
+
+
+def test_canonical_endpoint_cloud_disabled_returns_403(monkeypatch):
+    """Verify the FastAPI route returns 403 when cloud provider governance blocks the request."""
+    monkeypatch.setenv("LLM_PROVIDER", "openai")
+    monkeypatch.delenv("ENABLE_OPENAI", raising=False)
+
+    from fastapi import FastAPI
+    from fastapi.testclient import TestClient
+
+    from backend.app.integrations.llm.canonical import router as canonical_router
+
+    _app = FastAPI()
+    _app.include_router(canonical_router)
+
+    client = TestClient(_app, raise_server_exceptions=False)
+    response = client.post(
+        "/api/llm/generate",
+        json={
+            "model": "sofia-core",
+            "messages": [{"role": "user", "content": "hello"}],
+        },
+    )
+    assert response.status_code == 403
