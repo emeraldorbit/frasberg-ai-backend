@@ -1,31 +1,32 @@
 // llm/brain.js
 import fetch from "node-fetch";
 
+const SOFIA_BACKEND_URL = process.env.SOFIA_BACKEND_URL || "http://localhost:8000";
+const CANONICAL_ENDPOINT = `${SOFIA_BACKEND_URL}/api/llm/generate`;
+
+async function _callCanonical(messages) {
+  const response = await fetch(CANONICAL_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ model: "sofia-core", messages })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Canonical LLM request failed at ${CANONICAL_ENDPOINT}: ${response.statusText}`);
+  }
+
+  const result = await response.json();
+  return result.output;
+}
+
 export async function runLLM(transcript) {
   console.log("Sending transcript to LLM:", transcript);
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.LLM_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: "gpt-5.2",
-        messages: [
-          { role: "system", content: "You are Sofia, a warm, human-like conversational AI." },
-          { role: "user", content: transcript }
-        ]
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error(`LLM request failed: ${response.statusText}`);
-    }
-
-    const result = await response.json();
-    const reply = result.choices[0].message.content;
+    const reply = await _callCanonical([
+      { role: "system", content: "You are Sofia, a warm, human-like conversational AI." },
+      { role: "user", content: transcript }
+    ]);
 
     console.log("LLM reply:", reply);
     return reply;
@@ -39,27 +40,16 @@ export async function generateSessionSummaryWithTags(events) {
   console.log("Generating session summary with tags...");
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.LLM_API_KEY}`,
-        "Content-Type": "application/json"
+    const reply = await _callCanonical([
+      {
+        role: "system",
+        content: "You are Sofia, a conversational AI. Summarize the session clearly and warmly, and also provide 2–5 tags that describe the conversation (e.g., greeting, question, farewell, small talk)."
       },
-      body: JSON.stringify({
-        model: "gpt-5.2",
-        messages: [
-          { role: "system", content: "You are Sofia, a conversational AI. Summarize the session clearly and warmly, and also provide 2–5 tags that describe the conversation (e.g., greeting, question, farewell, small talk)." },
-          { role: "user", content: `Here are the session events:\n${JSON.stringify(events, null, 2)}` }
-        ]
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error(`LLM summary request failed: ${response.statusText}`);
-    }
-
-    const result = await response.json();
-    const reply = result.choices[0].message.content;
+      {
+        role: "user",
+        content: `Here are the session events:\n${JSON.stringify(events, null, 2)}`
+      }
+    ]);
 
     // Expecting output like:
     // "Summary: ...\nTags: tag1, tag2"
@@ -74,4 +64,3 @@ export async function generateSessionSummaryWithTags(events) {
     return { summary: "Summary unavailable due to error.", tags: [] };
   }
 }
-

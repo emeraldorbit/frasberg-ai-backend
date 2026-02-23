@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 # Import v5.1 features
 from backend.app.integrations.llm import router as llm_router
+from backend.app.integrations.llm.canonical import router as canonical_llm_router
 from backend.app.auth import auth_router
 from backend.app.database import init_db, check_db_connection
 from backend.app.cache import cache
@@ -67,6 +68,7 @@ app.add_middleware(
 )
 
 # Include v5.1 routers
+app.include_router(canonical_llm_router)
 app.include_router(llm_router)
 app.include_router(auth_router)
 
