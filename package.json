@@ -1,8 +1,8 @@
 {
-  "name": "sofia-core-monorepo",
+  "name": "frasberg-ai-monorepo",
   "private": true,
   "version": "6.5.0",
-  "description": "Sofia Core Backend — Behavioral Governance and Codex Architecture",
+  "description": "Frasberg AI Backend — Behavioral Governance and Codex Architecture",
   "type": "module",
   "workspaces": [
     "packages/*"
@@ -17,12 +17,12 @@
   },
   "dependencies": {
     "express": "^4.18.0",
-    "@emeraldorbit/sofia-governance-engine": "workspace:*",
-    "@emeraldorbit/sofia-tonal-modulation": "workspace:*",
-    "@emeraldorbit/sofia-membrane-protocol": "workspace:*",
-    "@emeraldorbit/sofia-hinge-logic": "workspace:*",
-    "@emeraldorbit/sofia-unified-field-runtime": "workspace:*",
-    "@emeraldorbit/sofia-continuum-identity": "workspace:*"
+    "@frasberg/governance-engine": "workspace:*",
+    "@frasberg/tonal-modulation": "workspace:*",
+    "@frasberg/membrane-protocol": "workspace:*",
+    "@frasberg/hinge-logic": "workspace:*",
+    "@frasberg/unified-field-runtime": "workspace:*",
+    "@frasberg/continuum-identity": "workspace:*"
   },
   "devDependencies": {
     "@types/express": "^4.17.0",
@@ -36,5 +36,7 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "author": "Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)",
+  "license": "UNLICENSED"
 }
