@@ -1,9 +1,9 @@
-# Sofia Core v4.0.1 - Documentation Index
+# Frasberg AI v6.5.0 - Documentation Index
 
 ## 🚀 Quick Links
 - **Quick Start**: Get running in 5 minutes
 - **API Reference**: Complete endpoint documentation
-- **System Architecture**: Understanding Sofia Core's design
+- **System Architecture**: Understanding Frasberg AI's design
 
 ## 📖 Getting Started
 
@@ -16,10 +16,10 @@
 ### Quick Start (5 Minutes)
 
 ```bash
-# Download v4.0.1
-wget https://github.com/emeraldorbit/sofia-core-backend/releases/download/v4.0.1/sofia-core-v4.0.1-stable.zip
-unzip sofia-core-v4.0.1-stable.zip
-cd sofia-core-v4.0.1-stable
+# Download v6.5.0
+wget https://github.com/emeraldorbit/frasberg-ai/releases/download/v6.5.0/frasberg-ai-v6.5.0-stable.zip
+unzip frasberg-ai-v6.5.0-stable.zip
+cd frasberg-ai-v6.5.0-stable
 
 # One-command setup
 ./quick-start.sh
@@ -59,13 +59,13 @@ Code
 │  • Quantum Cryptography            │
 │  • Distributed Mesh                │
 └─────────────────────────────────────┘
-              │
-     ┌────────┴────────┐
-     │                 │
-┌────▼────┐      ┌────▼────┐
-│  Forks  │      │  Infra  │
-│ (7 svcs)│      │ (2 svcs)│
-└─────────┘      └─────────┘
+               │
+      ┌────────┴────────┐
+      │                 │
+ ┌────▼────┐      ┌────▼────┐
+ │  Forks  │      │  Infra  │
+ │ (7 svcs)│      │ (2 svcs)│
+ └─────────┘      └─────────┘
 Technology Stack
 Backend: FastAPI (Python 3.11+)
 Containerization: Docker & Docker Compose
@@ -77,7 +77,7 @@ Troubleshooting
 Common Issues
 Service Won't Start
 
-Check logs: docker logs sofia_canonical_core
+Check logs: docker logs frasberg_canonical_core
 Verify ports: lsof -i :8000
 Check resources: docker system df
 Health Check Failing
@@ -108,15 +108,17 @@ Code style guidelines
 Testing requirements
 Pull request process
 Version History
-v4.0.1 (2026-02-08) - Stability release
-v4.0.0 (2026-02-08) - Distributed quantum-ready
-v3.0.0 (2026-02-08) - Autonomous intelligence
-v2.0.0 (2026-02-08) - Voice & governance
-v1.0.0 (2026-02-07) - Initial release
+v6.5.0 (2026-05-22) - Frasberg rebranding
+v6.0.0 (2026-02-08) - Distributed quantum-ready
+v5.0.0 (2026-02-08) - Autonomous intelligence
+v4.0.0 (2026-02-08) - Voice & governance
+v3.0.0 (2026-02-08) - Initial release
 License
-MIT License - See LICENSE for details
+UNLICENSED - Proprietary. See LICENSE for details
 
 Support
-GitHub Issues: https://github.com/emeraldorbit/sofia-core-backend/issues
-Discussions: https://github.com/emeraldorbit/sofia-core-backend/discussions
-Sofia Core v4.0.1 - Stable. Tested. Documented.
+GitHub Issues: https://github.com/emeraldorbit/frasberg-ai/issues
+Discussions: https://github.com/emeraldorbit/frasberg-ai/discussions
+Frasberg AI v6.5.0 - Stable. Tested. Documented.
+
+**Creator:** Frasberg Selassie — Mr. Clayton-M. Bernard-Ex.
