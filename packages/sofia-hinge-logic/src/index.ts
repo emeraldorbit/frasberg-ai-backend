@@ -1,7 +1,7 @@
 /**
- * @emeraldorbit/sofia-hinge-logic
+ * @frasberg/hinge-logic
  * 
- * Hinge logic engine for Sofia Core, enabling transitions, pivots,
+ * Hinge logic engine for Frasberg AI, enabling transitions, pivots,
  * and identity-state shifts.
  */
 

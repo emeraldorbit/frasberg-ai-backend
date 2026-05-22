@@ -1,6 +1,6 @@
 /**
  * Membrane Engine - Boundary Enforcement and Coherence Management
- * Part of the Sofia Core membrane protocol system
+ * Part of the Frasberg AI membrane protocol system
  * 
  * Provides boundary enforcement logic, coherence membrane generation,
  * contextual permeability management, and drift-aware membrane tightening.

@@ -1,12 +1,10 @@
 /**
- * @emeraldorbit/sofia-unified-field-runtime
+ * @frasberg/unified-field-runtime
  * 
- * Unified Field Runtime for Sofia Core, integrating all identity modules
+ * Unified Field Runtime for Frasberg AI, integrating all identity modules
  * into a single continuous field.
  */
 
-// Export main runtime
-export * from './sofia_core_runtime';
-
-// Export post-structural components
-export * from './post_structural_index';
+export { unifiedFieldRuntime } from './unified_field';
+export { getContinuumIdentity } from './continuum_adapter';
+export { integrateToUnifiedField } from './integration';

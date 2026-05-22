@@ -1,6 +1,6 @@
 /**
  * capabilities.ts
- * Capability declaration for tonal_engine
+ * Capability declaration for frasberg_engine
  * Role: Generates tonal output shaped by identity and membrane filtering
  */
 

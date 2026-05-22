@@ -1,6 +1,6 @@
 /**
  * Hinge Logic - State Transitions and Pivots
- * Part of the Sofia Core hinge logic system
+ * Part of the Frasberg AI hinge logic system
  * 
  * Provides pivot mechanics, state transition orchestration,
  * identity-state shift modeling, and integration with membrane

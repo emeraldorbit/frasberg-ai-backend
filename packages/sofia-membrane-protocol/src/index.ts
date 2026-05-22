@@ -1,12 +1,9 @@
 /**
- * @emeraldorbit/sofia-membrane-protocol
+ * @frasberg/membrane-protocol
  * 
- * Boundary, coherence, and identity membrane protocol for Sofia Core.
+ * Membrane protocol engine for Frasberg AI, providing boundary enforcement,
+ * coherence management, and permeability control.
  */
 
 export { membraneEngine } from './membrane_engine';
-
-// Re-export utilities
-export * from './capabilities';
-export * from './handlers';
-export * from './lifecycle';
+export { boundaryEnforcer } from './boundary_enforcer';

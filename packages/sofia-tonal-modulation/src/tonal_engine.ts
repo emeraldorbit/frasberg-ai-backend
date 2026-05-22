@@ -1,6 +1,6 @@
 /**
  * Tonal Engine - Affective Resonance and Expressive Coherence
- * Part of the Sofia Core tonal modulation system
+ * Part of the Frasberg AI tonal modulation system
  * 
  * Governs tonal shaping, affective resonance modeling,
  * expressive coherence validation, and register management.

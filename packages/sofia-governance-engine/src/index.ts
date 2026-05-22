@@ -1,14 +1,10 @@
 /**
- * @emeraldorbit/sofia-governance-engine
+ * @frasberg/governance-engine
  * 
- * Core governance engine for Sofia Core, including decision logic,
- * stabilization routines, and behavioral enforcement.
+ * Governance engine for Frasberg AI, enabling decision logic, stabilization,
+ * and behavioral enforcement.
  */
 
 export { deviationEngine } from './deviation_engine';
-export { orchestrate } from './orchestration_engine';
-
-// Re-export types and utilities
-export * from './capabilities';
-export * from './handlers';
-export * from './lifecycle';
+export { stabilizationEngine } from './stabilization_engine';
+export { enforcementEngine } from './enforcement_engine';
