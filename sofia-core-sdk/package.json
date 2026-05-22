@@ -1,7 +1,7 @@
 {
-  "name": "@sofia/core-sdk",
+  "name": "@frasberg/core-sdk",
   "version": "1.0.0",
-  "description": "Sofia Core SDK — unified client for text, image, and video generation.",
+  "description": "Frasberg AI SDK — unified client for text, image, and video generation.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
@@ -18,8 +18,8 @@
     "prepare": "npm run build",
     "test": "vitest"
   },
-  "keywords": ["sofia", "ai", "sdk", "llm", "image-generation", "video-generation"],
-  "author": "Emerald Estates",
+  "keywords": ["frasberg", "ai", "sdk", "llm", "image-generation", "video-generation"],
+  "author": "Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)",
   "license": "UNLICENSED",
   "dependencies": {},
   "devDependencies": {
