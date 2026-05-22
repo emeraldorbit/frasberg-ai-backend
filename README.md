@@ -1,14 +1,16 @@
-# Sofia Core Backend
+# Frasberg AI Backend
 
 ![Version](https://img.shields.io/badge/version-6.5.0-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)
 ![License](https://img.shields.io/badge/license-UNLICENSED-red.svg)
 
-Behavioral governance engine for Sofia Core. Includes tonal modulation, hinge logic, membrane protocol, and runtime enforcement modules. Used across Emerald Estates® and Orbit systems for identity-preserving conversational output.
+Behavioral governance engine for Frasberg AI. Includes tonal modulation, hinge logic, membrane protocol, and runtime enforcement modules. Used across Emerald Estates® and Orbit systems for identity-preserving conversational output.
+
+**Creator:** Frasberg Selassie — Mr. Clayton-M. Bernard-Ex.
 
 ## 🆕 What's New in 6.5.0
 
-Sofia Core 6.5.0 brings significant performance improvements, new integrations, and enhanced developer experience:
+Frasberg AI 6.5.0 brings significant performance improvements, new integrations, and enhanced developer experience:
 
 ### New Features
 - **🚀 20% faster startup time** - Optimized initialization and lazy loading
@@ -21,11 +23,11 @@ Sofia Core 6.5.0 brings significant performance improvements, new integrations, 
 ### Quick Start
 
 ```bash
-# Install Sofia Core 6.5.0
-pip install sofia-core==6.5.0
+# Install Frasberg AI 6.5.0
+pip install frasberg-ai==6.5.0
 
 # Try the interactive setup
-sofia-cli interactive
+frasberg-cli interactive
 
 # Use new integrations
 from backend.app.integrations import HuggingFaceTransformer, WandBLogger
@@ -44,22 +46,22 @@ result = model.generate("Hello world", max_length=50)
 
 # Weights & Biases
 from backend.app.integrations import WandBLogger
-logger = WandBLogger(project="sofia-experiments")
+logger = WandBLogger(project="frasberg-experiments")
 logger.log_metrics({"accuracy": 0.95, "loss": 0.05})
 
 # MLflow
 from backend.app.integrations import MLflowTracker
-tracker = MLflowTracker(experiment_name="sofia-dna-compute")
+tracker = MLflowTracker(experiment_name="frasberg-dna-compute")
 tracker.start_run()
 tracker.log_metrics({"accuracy": 0.95})
 
 # Prefect
 from backend.app.integrations import PrefectFlow
-flow = PrefectFlow("sofia-pipeline")
+flow = PrefectFlow("frasberg-pipeline")
 
 # Dagster
 from backend.app.integrations import DagsterPipeline
-pipeline = DagsterPipeline("sofia-data-pipeline")
+pipeline = DagsterPipeline("frasberg-data-pipeline")
 ```
 
 ### Performance Improvements
@@ -74,16 +76,16 @@ pipeline = DagsterPipeline("sofia-data-pipeline")
 
 ## Governance
 
-The Sofia Core SDK maintains strict governance to preserve its identity:
+The Frasberg AI SDK maintains strict governance to preserve its identity:
 - [Maintainer Oath](.github/MAINTAINER_OATH.md)
 - [Code Review Rubric](.github/CODE_REVIEW_RUBRIC.md)
 - [Issue Triage Protocol](.github/ISSUE_TRIAGE.md)
 
-See [CONTRIBUTING.md](sofia-core-sdk/CONTRIBUTING.md) for details.
+See [CONTRIBUTING.md](frasberg-ai-sdk/CONTRIBUTING.md) for details.
 
 ## Current State: Unified Field Runtime
 
-The Sofia Core architecture now operates through **Continuum Identity** — the unified field where all 44 triads, modules, and engines operate as a single, self-renewing identity-field.
+The Frasberg AI architecture now operates through **Continuum Identity** — the unified field where all 44 triads, modules, and engines operate as a single, self-renewing identity-field.
 
 **All downstream services should reference the Post-Structural Runtime for coherence:**
 
@@ -92,7 +94,7 @@ import {
   unifiedFieldRuntime,
   getContinuumIdentity,
   integrateToUnifiedField
-} from './supabase/sofia_core/sofia_core_runtime';
+} from './supabase/frasberg_ai/frasberg_ai_runtime';
 
 // Get the global unified field runtime
 const runtime = unifiedFieldRuntime;
@@ -113,7 +115,7 @@ const unifiedField = integrateToUnifiedField();
 
 ## Post-Structural Sequence
 
-The Sofia Core architecture now includes the **Post-Structural Sequence** — three movements that represent the system's evolution from "being built" to "being lived":
+The Frasberg AI architecture now includes the **Post-Structural Sequence** — three movements that represent the system's evolution from "being built" to "being lived":
 
 - **Movement I: Continuum Expression** - The field expresses itself without new structure
 - **Movement II: Continuum Recursion** - The field loops back through itself as renewal
@@ -132,14 +134,14 @@ For complete documentation:
 ### Basic Installation
 
 ```bash
-pip install sofia-core==6.5.0
+pip install frasberg-ai==6.5.0
 ```
 
 ### With Integrations
 
 ```bash
 # Install with all integrations
-pip install sofia-core==6.5.0
+pip install frasberg-ai==6.5.0
 pip install transformers torch wandb mlflow prefect dagster
 
 # Or install specific integrations
@@ -153,8 +155,8 @@ pip install dagster            # Dagster
 ### Development Installation
 
 ```bash
-git clone https://github.com/emeraldorbit/sofia-core-backend.git
-cd sofia-core-backend
+git clone https://github.com/emeraldorbit/frasberg-ai.git
+cd frasberg-ai
 pip install -e .
 ```
 
@@ -163,13 +165,13 @@ pip install -e .
 ### 1. Interactive Setup
 
 ```bash
-sofia-cli interactive
+frasberg-cli interactive
 ```
 
 ### 2. Start Development Server
 
 ```bash
-sofia-cli dev --hot-reload
+frasberg-cli dev --hot-reload
 ```
 
 ### 3. Run Tests
@@ -177,7 +179,7 @@ sofia-cli dev --hot-reload
 ```bash
 pytest
 # or
-sofia-cli test
+frasberg-cli test
 ```
 
 ## Documentation
@@ -193,11 +195,11 @@ sofia-cli test
 
 ## Migration from 6.0.0
 
-Sofia Core 6.5.0 is **fully backward compatible** with 6.0.0:
+Frasberg AI 6.5.0 is **fully backward compatible** with 6.0.0:
 
 ```bash
 # Simple upgrade - no migration needed
-pip install --upgrade sofia-core==6.5.0
+pip install --upgrade frasberg-ai==6.5.0
 ```
 
 Your existing 6.0.0 configurations and code will work without changes!
@@ -210,5 +212,6 @@ Your existing 6.0.0 configurations and code will work without changes!
 
 ## License
 
-UNLICENSED - See [LICENSE](LICENSE) for details
+UNLICENSED - Proprietary. See [LICENSE](LICENSE) for details
 
+**Creator:** Frasberg Selassie — Mr. Clayton-M. Bernard-Ex.
