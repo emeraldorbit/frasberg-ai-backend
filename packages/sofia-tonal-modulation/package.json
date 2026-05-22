@@ -1,7 +1,7 @@
 {
-  "name": "@emeraldorbit/sofia-tonal-modulation",
+  "name": "@frasberg/tonal-modulation",
   "version": "1.0.0",
-  "description": "Tonal modulation engine for Sofia Core, governing affective resonance and expressive coherence.",
+  "description": "Tonal modulation engine for Frasberg AI, governing affective resonance and expressive coherence.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "echo 'No linting configured'"
   },
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.5.0",
@@ -20,5 +20,6 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  }
+  },
+  "author": "Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)"
 }

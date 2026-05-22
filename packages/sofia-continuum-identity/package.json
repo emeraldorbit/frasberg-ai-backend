@@ -1,7 +1,7 @@
 {
-  "name": "@emeraldorbit/sofia-continuum-identity",
+  "name": "@frasberg/continuum-identity",
   "version": "1.0.0",
-  "description": "Continuum Identity engine for Sofia Core, governing identity persistence, recursion, and self-renewal.",
+  "description": "Continuum Identity engine for Frasberg AI, governing identity persistence, recursion, and self-renewal.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "echo 'No linting configured'"
   },
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.5.0",
@@ -20,5 +20,6 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  }
+  },
+  "author": "Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)"
 }

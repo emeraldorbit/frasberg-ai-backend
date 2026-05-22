@@ -1,7 +1,7 @@
 {
-  "name": "@emeraldorbit/sofia-unified-field-runtime",
+  "name": "@frasberg/unified-field-runtime",
   "version": "1.0.0",
-  "description": "Unified Field Runtime for Sofia Core, integrating all identity modules into a single continuous field.",
+  "description": "Unified Field Runtime for Frasberg AI, integrating all identity modules into a single continuous field.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,13 +9,13 @@
     "test": "jest",
     "lint": "echo 'No linting configured'"
   },
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {
-    "@emeraldorbit/sofia-governance-engine": "workspace:*",
-    "@emeraldorbit/sofia-tonal-modulation": "workspace:*",
-    "@emeraldorbit/sofia-membrane-protocol": "workspace:*",
-    "@emeraldorbit/sofia-hinge-logic": "workspace:*",
-    "@emeraldorbit/sofia-continuum-identity": "workspace:*"
+    "@frasberg/governance-engine": "workspace:*",
+    "@frasberg/tonal-modulation": "workspace:*",
+    "@frasberg/membrane-protocol": "workspace:*",
+    "@frasberg/hinge-logic": "workspace:*",
+    "@frasberg/continuum-identity": "workspace:*"
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",
@@ -26,5 +26,6 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  }
+  },
+  "author": "Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)"
 }

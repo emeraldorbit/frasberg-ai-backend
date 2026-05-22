@@ -1,7 +1,7 @@
 {
-  "name": "@emeraldorbit/sofia-hinge-logic",
+  "name": "@frasberg/hinge-logic",
   "version": "1.0.0",
-  "description": "Hinge logic engine for Sofia Core, enabling transitions, pivots, and identity-state shifts.",
+  "description": "Hinge logic engine for Frasberg AI, enabling transitions, pivots, and identity-state shifts.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "echo 'No linting configured'"
   },
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.5.0",
@@ -20,5 +20,6 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  }
+  },
+  "author": "Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)"
 }

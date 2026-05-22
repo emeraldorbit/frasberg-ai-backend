@@ -1,7 +1,7 @@
 {
-  "name": "@emeraldorbit/sofia-governance-engine",
+  "name": "@frasberg/governance-engine",
   "version": "1.0.0",
-  "description": "Core governance engine for Sofia Core, including decision logic, stabilization routines, and behavioral enforcement.",
+  "description": "Core governance engine for Frasberg AI, including decision logic, stabilization routines, and behavioral enforcement.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "echo 'No linting configured'"
   },
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^29.5.0",
@@ -20,5 +20,6 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  }
+  },
+  "author": "Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)"
 }
