@@ -9,7 +9,7 @@ if os.path.exists(readme_path):
         long_description = f.read()
 
 setup(
-    name='sofia-cli',
+    name='frasberg-cli',
     version='6.0.0',
     packages=find_packages(),
     install_requires=[
@@ -19,18 +19,18 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'sofia=sofia.main:cli',
+            'frasberg=frasberg.main:cli',
         ],
     },
-    author='Sofia Core Team',
-    description='Command-line interface for Sofia Core',
+    author='Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)',
+    description='Command-line interface for Frasberg AI',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/emeraldorbit/sofia-core-backend',
+    url='https://github.com/emeraldorbit/frasberg-ai',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
+        'License :: Other/Proprietary License',
         'Programming Language :: Python :: 3.11',
     ],
 )
