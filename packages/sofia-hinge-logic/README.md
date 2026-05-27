@@ -1,6 +1,6 @@
-# @emeraldorbit/sofia-hinge-logic
+# @frasberg/hinge-logic
 
-Hinge logic engine for Sofia Core, enabling transitions, pivots, and identity-state shifts.
+Hinge logic engine for Frasberg AI, enabling transitions, pivots, and identity-state shifts.
 
 ## Features
 
@@ -12,13 +12,13 @@ Hinge logic engine for Sofia Core, enabling transitions, pivots, and identity-st
 ## Installation
 
 ```bash
-pnpm add @emeraldorbit/sofia-hinge-logic
+pnpm add @frasberg/hinge-logic
 ```
 
 ## Usage
 
 ```typescript
-import { hingeLogic, shiftFieldState } from '@emeraldorbit/sofia-hinge-logic';
+import { hingeLogic, shiftFieldState } from '@frasberg/hinge-logic';
 
 // Initialize a transition
 const transition = hingeLogic.initializeTransition(
@@ -57,4 +57,6 @@ Applies directional shift logic to produce shifted field state.
 
 ## License
 
-MIT
+UNLICENSED - Proprietary
+
+**Creator:** Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)

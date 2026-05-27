@@ -1,11 +1,11 @@
-# Sofia CLI
+# Frasberg CLI
 
-Command-line interface for Sofia Core v5.0.0.
+Command-line interface for Frasberg AI v6.0.0.
 
 ## Installation
 
 ```bash
-pip install sofia-cli
+pip install frasberg-cli
 ```
 
 Or from source:
@@ -19,25 +19,25 @@ pip install -e .
 
 ```bash
 # Check health
-sofia health
+frasberg health
 
 # Get system status
-sofia status
+frasberg status
 
 # List services
-sofia services
+frasberg services
 
 # Generate speech
-sofia speak "Hello world" --language en --emotion warm
+frasberg speak "Hello world" --language en --emotion warm
 
 # Generate AI response
-sofia generate "Explain quantum computing" --provider anthropic
+frasberg generate "Explain quantum computing" --provider anthropic
 
 # Get mesh topology
-sofia mesh
+frasberg mesh
 
 # Get metrics
-sofia metrics
+frasberg metrics
 ```
 
 ## Commands
@@ -55,14 +55,16 @@ sofia metrics
 Set base URL:
 
 ```bash
-export SOFIA_BASE_URL=http://localhost:8000
+export FRASBERG_BASE_URL=http://localhost:8000
 ```
 
 ## Requirements
 
 - Python 3.11+
-- Sofia Core v5.0.0 running
+- Frasberg AI v6.0.0 running
 
 ## License
 
-MIT License
+UNLICENSED - Proprietary
+
+**Creator:** Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)

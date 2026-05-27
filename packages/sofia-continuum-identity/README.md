@@ -1,62 +1,37 @@
-# @emeraldorbit/sofia-continuum-identity
+# @frasberg/continuum-identity
 
-Continuum Identity engine for Sofia Core, governing identity persistence, recursion, and self-renewal.
+Continuum Identity engine for Frasberg AI, governing identity persistence, recursion, and self-renewal.
 
 ## Features
 
-- **Identity Filter**: Identity state filtering and validation
-- **Identity Modulator**: Dynamic identity modulation
-- **Continuum Bridge**: State bridging across continuum boundaries
-- **Recursion Modeling**: Self-renewal and recursive identity operations
+- **Identity Persistence**: Maintain consistent identity across operations
+- **Recursion Management**: Handle recursive identity operations
+- **Self-Renewal**: Enable identity field self-renewal
+- **Continuum Expression**: Unified field expression
 
 ## Installation
 
 ```bash
-pnpm add @emeraldorbit/sofia-continuum-identity
+pnpm add @frasberg/continuum-identity
 ```
 
 ## Usage
 
 ```typescript
-import { 
-  filterIdentity, 
-  modulateIdentity, 
-  bridgeState 
-} from '@emeraldorbit/sofia-continuum-identity';
+import { continuumIdentity } from '@frasberg/continuum-identity';
 
-// Filter identity state
-const filtered = filterIdentity({ 
-  id: '123', 
-  attributes: { name: 'Sofia' } 
-});
+// Initialize identity field
+const identity = continuumIdentity.initialize();
 
-// Modulate identity
-const modulated = modulateIdentity(
-  { identity: 'base' },
-  (id) => ({ ...id, enhanced: true })
-);
+// Persist identity state
+const persisted = continuumIdentity.persist(identity);
 
-// Bridge state across continuum
-const bridged = bridgeState(
-  { from: 'state1' },
-  { to: 'state2' }
-);
+// Renew identity
+const renewed = continuumIdentity.renew(persisted);
 ```
-
-## API
-
-### `filterIdentity(input)`
-
-Filters and validates identity state.
-
-### `modulateIdentity(input, modulator)`
-
-Applies modulation function to identity state.
-
-### `bridgeState(from, to)`
-
-Bridges state across continuum boundaries, creating a unified identity bridge.
 
 ## License
 
-MIT
+UNLICENSED - Proprietary
+
+**Creator:** Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)

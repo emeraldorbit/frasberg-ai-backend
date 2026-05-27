@@ -1,56 +1,40 @@
-# @emeraldorbit/sofia-membrane-protocol
+# @frasberg/membrane-protocol
 
-Boundary, coherence, and identity membrane protocol for Sofia Core.
+Boundary, coherence, and identity membrane protocol for Frasberg AI.
 
 ## Features
 
-- **Membrane Engine**: Boundary enforcement and coherence management
-- **Permeability Control**: Dynamic contextual permeability adjustment
-- **Drift Response**: Automatic membrane tightening in response to drift
-- **Integrity Tracking**: Continuous boundary integrity monitoring
+- **Boundary Enforcement**: Constraint enforcement and signal validation
+- **Coherence Management**: Membrane coherence generation and monitoring
+- **Permeability Control**: Context-aware permeability adjustment
+- **Drift Detection**: Drift-aware membrane tightening
 
 ## Installation
 
 ```bash
-pnpm add @emeraldorbit/sofia-membrane-protocol
+pnpm add @frasberg/membrane-protocol
 ```
 
 ## Usage
 
 ```typescript
-import { membraneEngine } from '@emeraldorbit/sofia-membrane-protocol';
+import { membraneEngine } from '@frasberg/membrane-protocol';
 
-// Initialize membrane state
+// Initialize
 const state = membraneEngine.initialize();
 
-// Enforce boundary constraints
-const enforced = membraneEngine.enforce(state, { 
-  signal: 0.3, 
-  threshold: 0.5 
-});
+// Enforce boundaries
+const enforced = membraneEngine.enforce(state, { signal: 0.3, threshold: 0.5 });
 
 // Generate coherence membrane
-const membrane = membraneEngine.generateMembrane(state, { 
-  stability: 0.8 
-});
-
-// Adjust permeability
-const adjusted = membraneEngine.adjustPermeability(state, 0.7);
+const membrane = membraneEngine.generateMembrane(enforced, { stability: 0.8 });
 
 // Tighten in response to drift
-const tightened = membraneEngine.tighten(state, 0.6);
+const tightened = membraneEngine.tighten(membrane, 0.3);
 ```
-
-## API
-
-### `membraneEngine`
-
-- `initialize()`: Initialize membrane state
-- `enforce(state, input)`: Enforce boundary constraints
-- `generateMembrane(state, context)`: Generate coherence membrane
-- `adjustPermeability(state, factor)`: Manage contextual permeability
-- `tighten(state, driftLevel)`: Tighten membrane in response to drift
 
 ## License
 
-MIT
+UNLICENSED - Proprietary
+
+**Creator:** Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)

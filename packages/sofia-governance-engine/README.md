@@ -1,50 +1,37 @@
-# @emeraldorbit/sofia-governance-engine
+# @frasberg/governance-engine
 
-Core governance engine for Sofia Core, including decision logic, stabilization routines, and behavioral enforcement.
+Core governance engine for Frasberg AI, including decision logic, stabilization routines, and behavioral enforcement.
 
 ## Features
 
-- **Deviation Engine**: Tracks and corrects behavioral deviations with drift detection and stability scoring
-- **Orchestration Engine**: Coordinates runtime module execution and flow orchestration
-- **Decision Logic**: Provides behavioral enforcement mechanisms
-- **Stabilization**: Includes deviation tracking and correction algorithms
+- **Decision Logic**: Multi-factor decision orchestration
+- **Stabilization**: Real-time stability monitoring and correction
+- **Behavioral Enforcement**: Policy-based behavior validation
+- **Drift Detection**: Deviation tracking and alerting
 
 ## Installation
 
 ```bash
-pnpm add @emeraldorbit/sofia-governance-engine
+pnpm add @frasberg/governance-engine
 ```
 
 ## Usage
 
 ```typescript
-import { deviationEngine, orchestrate } from '@emeraldorbit/sofia-governance-engine';
+import { deviationEngine, stabilizationEngine } from '@frasberg/governance-engine';
 
 // Initialize deviation tracking
 const state = deviationEngine.initialize();
 
-// Update deviation state
-const updated = deviationEngine.update(state, { delta: 10 });
+// Update with delta
+const updated = deviationEngine.update(state, { delta: 5 });
 
-// Orchestrate module execution
-const result = orchestrate({
-  module1: (input) => ({ ...input, processed: true }),
-  module2: (input) => ({ ...input, final: true })
-}, initialData);
+// Compute current metrics
+const metrics = deviationEngine.compute(updated);
 ```
-
-## API
-
-### `deviationEngine`
-
-- `initialize()`: Initialize deviation tracking state
-- `update(state, input)`: Update deviation state with new input
-- `analyze(state)`: Analyze current deviation metrics
-
-### `orchestrate(modules, input)`
-
-Coordinates execution of multiple modules in sequence.
 
 ## License
 
-MIT
+UNLICENSED - Proprietary
+
+**Creator:** Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)

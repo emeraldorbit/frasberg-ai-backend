@@ -1,51 +1,37 @@
-# @emeraldorbit/sofia-tonal-modulation
+# @frasberg/tonal-modulation
 
-Tonal modulation engine for Sofia Core, governing affective resonance and expressive coherence.
+Tonal modulation engine for Frasberg AI, governing affective resonance and expressive coherence.
 
 ## Features
 
-- **Tonal Engine**: Affective resonance modeling and expressive coherence validation
-- **Resonance Conductor**: Unifies outputs from multiple engines into harmonized composites
-- **Register Management**: Supports ceremonial, operational, and conceptual registers
-- **Tonal Shaping**: Modulates tonal qualities and intensity
+- **Tonal Shaping**: Modulate output tone and register
+- **Affective Resonance**: Emotional state modeling
+- **Expressive Coherence**: Expression validation
+- **Register Management**: Ceremonial, operational, and conceptual registers
 
 ## Installation
 
 ```bash
-pnpm add @emeraldorbit/sofia-tonal-modulation
+pnpm add @frasberg/tonal-modulation
 ```
 
 ## Usage
 
 ```typescript
-import { tonalEngine, conductResonance } from '@emeraldorbit/sofia-tonal-modulation';
+import { tonalEngine } from '@frasberg/tonal-modulation';
 
-// Initialize tonal state
+// Initialize
 const state = tonalEngine.initialize();
 
 // Shape tonal qualities
-const shaped = tonalEngine.shape(state, { 
-  register: 'ceremonial', 
-  intensity: 0.8 
-});
+const shaped = tonalEngine.shape(state, { register: 'operational', intensity: 0.7 });
 
-// Conduct resonance across signals
-const result = conductResonance([1, 2, 3, 4, 5], 'average');
+// Validate coherence
+const validation = tonalEngine.validate(shaped);
 ```
-
-## API
-
-### `tonalEngine`
-
-- `initialize()`: Initialize tonal engine state
-- `shape(state, input)`: Shape tonal qualities
-- `modulate(state, target)`: Modulate affective resonance
-- `validate(state)`: Validate expressive coherence
-
-### `conductResonance(signals, strategy)`
-
-Conducts resonance across multiple signals using 'average', 'first', or 'last' strategy.
 
 ## License
 
-MIT
+UNLICENSED - Proprietary
+
+**Creator:** Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)
