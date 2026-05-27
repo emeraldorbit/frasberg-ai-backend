@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  sofia-core:
-    container_name: sofia_canonical_core
+  frasberg-core:
+    container_name: frasberg_canonical_core
     build:
       context: ../..
       dockerfile: deploy/canonical-core/Dockerfile
@@ -16,7 +16,7 @@ services:
       - ../../backend/app:/app/app
     restart: unless-stopped
     networks:
-      - sofia-network
+      - frasberg-network
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
@@ -25,5 +25,5 @@ services:
       start_period: 5s
 
 networks:
-  sofia-network:
+  frasberg-network:
     driver: bridge

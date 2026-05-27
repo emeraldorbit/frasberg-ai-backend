@@ -4,7 +4,7 @@ services:
     build:
       context: ../..
       dockerfile: deploy/analytics/Dockerfile
-    container_name: sofia_analytics
+    container_name: frasberg_analytics
     ports:
       - "5000:5000"
     environment:

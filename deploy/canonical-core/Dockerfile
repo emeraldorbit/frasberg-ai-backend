@@ -1,4 +1,4 @@
-# SOFIA Core v1.0.0 - Canonical Core
+# FRASBERG Core v1.0.0 - Canonical Core
 # Docker Image
 
 FROM python:3.11-slim
