@@ -1,87 +1,68 @@
-# Sofia SDK for Python
+# Frasberg AI SDK
 
-Official Python SDK for Sofia Core v5.0.0.
+**Python SDK for Frasberg AI v6.0.0**
 
 ## Installation
 
 ```bash
-pip install sofia-sdk
+pip install frasberg-sdk
 ```
 
 ## Quick Start
 
 ```python
-from sofia_sdk import SofiaClient
+from frasberg_sdk import FrasbergClient
 
 # Initialize client
-client = SofiaClient(base_url="http://localhost:8000")
-
-# Check health
-health = client.health()
-print(health)
-
-# Generate speech
-audio = client.synthesize_speech("Hello world", language="en")
-print(audio['audio_url'])
-
-# Generate AI response
-response = client.generate("Explain quantum computing")
-print(response['response'])
-
-# Store memory
-memory = client.store_memory(
-    user_id="user123",
-    content="User prefers technical explanations",
-    memory_type="preference",
-    importance=0.9
+client = FrasbergClient(
+    api_key="your-api-key",
+    base_url="http://localhost:8000"
 )
 
-# Recall memories
-memories = client.recall_memories(user_id="user123", query="preferences")
-print(memories)
+# Generate text
+response = client.generate(
+    prompt="Explain quantum computing",
+    model="frasberg-core"
+)
+
+print(response.text)
 ```
 
 ## Features
 
-- **Health Monitoring**: Check system health and metrics
-- **Voice**: Text-to-speech and speech-to-text
-- **AI**: LLM generation, validation, reasoning
-- **Memory**: Long-term memory storage and recall
-- **Distributed**: Mesh network operations
-- **Quantum**: Post-quantum cryptography
-- **v5 Features**: Biological computing, swarm intelligence, temporal reasoning
+- ✅ Text generation
+- ✅ Voice synthesis
+- ✅ Emotion detection
+- ✅ Async support
+- ✅ Type hints
 
-## v5.0.0 New Features
+## API Reference
 
-### DNA Computing
+### `FrasbergClient`
+
 ```python
-result = client.dna_compute(
-    sequence="ATCGATCGATCG",
-    computation_type="parallel_search"
+client = FrasbergClient(
+    api_key: str,
+    base_url: str = "http://localhost:8000",
+    timeout: int = 30
 )
 ```
 
-### Swarm Intelligence
+### `generate()`
+
 ```python
-swarm = client.create_swarm(
-    num_agents=100,
-    coordination_strategy="consensus",
-    objective="network_optimization"
+response = client.generate(
+    prompt: str,
+    model: str = "frasberg-core",
+    temperature: float = 0.2,
+    max_tokens: int = 4096
 )
 ```
 
-### Temporal Reasoning
-```python
-prediction = client.temporal_reasoning(
-    query="Technology trends",
-    time_context="last_decade",
-    prediction_horizon=365
-)
-```
+## Requirements
 
-## Documentation
-
-See full documentation at: https://docs.sofia-core.ai
+- Python 3.11+
+- Frasberg AI v6.0.0+
 
 ## License
 
