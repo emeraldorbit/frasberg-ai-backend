@@ -19,7 +19,7 @@
     "test": "vitest"
   },
   "keywords": ["frasberg", "ai", "sdk", "llm", "image-generation", "video-generation"],
-  "author": "Frasberg Selassie (Mr. Clayton-M. Bernard-Ex.)",
+  "author": "Emerald Estates",
   "license": "UNLICENSED",
   "dependencies": {},
   "devDependencies": {
